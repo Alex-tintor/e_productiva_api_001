@@ -1,10 +1,7 @@
 package com.sena.eproductiva.manager.services;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sena.eproductiva.manager.models.dao.entitys.CentroFormacionEntity;
 import com.sena.eproductiva.manager.repositories.CentroFormacionRepository;

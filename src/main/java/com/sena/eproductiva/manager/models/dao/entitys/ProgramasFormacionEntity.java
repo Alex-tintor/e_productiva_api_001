@@ -11,20 +11,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter 
+@Setter
 
 @Entity
-@Table(name = "centros_de_formacion")
-public class CentroFormacionEntity {
-
+@Table(name = "programas_de_formacion")
+public class ProgramasFormacionEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true,nullable = false)
     private long id;
 
     @Column(length = 75,nullable = false)
     private String nombre;
-    
-    private boolean enabled = true;
 
+    private boolean enabled = true;
 }
