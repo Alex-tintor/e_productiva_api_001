@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController // lo registra como controlador
-@RequestMapping("/api/v1") // la ruta que controla = localhost:8080/api/v1
+@RequestMapping("/api/centros") // la ruta que controla = localhost:8080/api/v1
 public class CentroFormacionController {
     @Autowired
     CentroFormacionService centroFormacionService;
