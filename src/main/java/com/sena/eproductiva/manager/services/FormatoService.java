@@ -17,7 +17,21 @@ public class FormatoService {
     public List<FormatoEntity> getAllFormato(){
         return (List<FormatoEntity>) formatoRepository.findAll();
     } 
+
     public Optional<FormatoEntity> getFormatoById(long id){
         return  formatoRepository.findById(id);
+    }
+
+    public  List<FormatoEntity> updateFormato(FormatoEntity FormatosEntity){
+        return (List<FormatoEntity>) formatoRepository.save(FormatosEntity); 
+    }
+
+    public List<FormatoEntity> createFormato(FormatoEntity formatoEntity){
+        return (List<FormatoEntity>) formatoRepository.save(formatoEntity);
+    }
+
+    public Optional<FormatoEntity> deleteFormatoById(long id){
+        formatoRepository.deleteById(id);
+        return null;
     }
 }

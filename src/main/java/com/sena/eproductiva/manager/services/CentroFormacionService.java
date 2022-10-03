@@ -20,4 +20,17 @@ public class CentroFormacionService {
     public Optional<CentroFormacionEntity> getCentroFormacionById(long id){
         return  centroFormacionRepository.findById(id);
     }
+
+    public  List<CentroFormacionEntity> updateFicha(CentroFormacionEntity centroFormacionEntity){
+        return (List<CentroFormacionEntity>) centroFormacionRepository.save(centroFormacionEntity); 
+    }
+
+    public List<CentroFormacionEntity> createFicha(CentroFormacionEntity centroFormacionEntity){
+        return (List<CentroFormacionEntity>) centroFormacionRepository.save(centroFormacionEntity);
+    }
+
+    public Optional<CentroFormacionEntity> deleteFichaById(long id){
+        centroFormacionRepository.deleteById(id);
+        return null;
+    }
 }

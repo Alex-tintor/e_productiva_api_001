@@ -21,4 +21,17 @@ public class ProgramasFormacionService {
     public Optional<ProgramasFormacionEntity> getProgramasFormacionById(long id){
         return programasFormacionRepository.findById(id);
     }
+
+    public  List<ProgramasFormacionEntity> updateFicha(ProgramasFormacionEntity programasFormacionEntity){
+        return (List<ProgramasFormacionEntity>) programasFormacionRepository.save(programasFormacionEntity); 
+    }
+
+    public List<ProgramasFormacionEntity> createFicha(ProgramasFormacionEntity programasFormacionEntity){
+        return (List<ProgramasFormacionEntity>) programasFormacionRepository.save(programasFormacionEntity);
+    }
+
+    public Optional<ProgramasFormacionEntity> deleteFichaById(long id){
+        programasFormacionRepository.deleteById(id);
+        return null;
+    }
 }

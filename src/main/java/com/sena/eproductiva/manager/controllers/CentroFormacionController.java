@@ -38,22 +38,22 @@ public class CentroFormacionController {
     }
 
     @PutMapping("/centrodeformacion/{id}")
-    public @ResponseBody ResponseEntity<String> updateCentroFormacion(@PathVariable("id") String id) {
+    public @ResponseBody ResponseEntity<?> updateCentroFormacion(@PathVariable("id") Long id) {
         return new ResponseEntity<>("se ha actualizado el centro de formacion", HttpStatus.OK);
     }
 
     @PostMapping("/centrodeformacion")
-    public @ResponseBody ResponseEntity<String> createCentroFormacion() {
+    public @ResponseBody ResponseEntity<?> createCentroFormacion() {
         return new ResponseEntity<>("se ha creado el centro de formacion", HttpStatus.CREATED);
     }
 
     @DeleteMapping("/centrodeformacion/{id}")
-    public @ResponseBody ResponseEntity<String> dropCentroFormacion(@PathVariable("id") String id) {
+    public @ResponseBody ResponseEntity<?> dropCentroFormacion(@PathVariable("id") Long id) {
         return new ResponseEntity<>("se borro exitosamente el centro de formacion", HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/health")
-    public @ResponseBody ResponseEntity<String> health() {
+    public @ResponseBody ResponseEntity<?> health() {
         return new ResponseEntity<>("ok", HttpStatus.ACCEPTED);
     }
 
