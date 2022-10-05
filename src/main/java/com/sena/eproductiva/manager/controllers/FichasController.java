@@ -17,42 +17,43 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sena.eproductiva.manager.models.dao.entitys.FichasEntity;
-import com.sena.eproductiva.manager.repositories.FichasRepository;
 import com.sena.eproductiva.manager.services.FichasService;
 
 @RestController
-@RequestMapping("/api/fichas")
+@RequestMapping("/api/ficha") // localhost.../api/fichas/id
 public class FichasController {
-    @Autowired
-    FichasService fichasService;
 
-    @GetMapping("/fichas")
-    public @ResponseBody ResponseEntity<?> getAllFichas(){
+    @Autowired
+    private FichasService fichasService;
+
+    @GetMapping("/")
+    public @ResponseBody ResponseEntity<?> getAllFichas() {
         List<FichasEntity> response = fichasService.getAllFichas();
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping ("/fichas/{id}")
-    public @ResponseBody ResponseEntity<?> getFichasById(@PathVariable("id") long id){
+    @GetMapping("/{id}")
+    public @ResponseBody ResponseEntity<?> getFichasById(@PathVariable("id") long id) {
         Optional<FichasEntity> response = fichasService.getFichaById(id);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
-    @PutMapping ("/fichas")
-    public @ResponseBody ResponseEntity<?> updateFichas(@RequestBody FichasEntity fichasEntity){
-        List<FichasEntity> response = fichasService.createFicha(fichasEntity);
+    @PutMapping("/")
+    public @ResponseBody ResponseEntity<?> updateFichas(@RequestBody FichasEntity fichasEntity) {
+        FichasEntity response = fichasService.createFicha(fichasEntity);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping ("/fichas")
-    public @ResponseBody ResponseEntity<?> createFicha(@RequestBody FichasEntity fichasEntity){
-        List<FichasEntity> response = fichasService.createFicha(fichasEntity);
-        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+    @PostMapping("/{id}")
+    public @ResponseBody ResponseEntity<?> createFicha(@RequestBody FichasEntity fichasEntity,
+            @PathVariable("id") long id) {
+        FichasEntity response = fichasService.createFicha(fichasEntity);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping ("/fichas/{id}")
-    public @ResponseBody ResponseEntity deleteFichaById(@PathVariable ("id") long id){
-        Optional<FichasEntity> response = fichasService.deleteFichaById(id);
-        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+    @DeleteMapping("/{id}")
+    public @ResponseBody ResponseEntity<?> deleteFichaById(@PathVariable("id") long id) {
+        fichasService.deleteFichaById(id);
+        return new ResponseEntity<>("ficha Inhabilitada con exito", HttpStatus.ACCEPTED);
     }
 }

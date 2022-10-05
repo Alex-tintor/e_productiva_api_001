@@ -11,27 +11,27 @@ import com.sena.eproductiva.manager.repositories.FormatoRepository;
 
 @Service
 public class FormatoService {
+
     @Autowired
-    FormatoRepository formatoRepository;
+    private FormatoRepository formatoRepository;
 
     public List<FormatoEntity> getAllFormato(){
-        return (List<FormatoEntity>) formatoRepository.findAll();
+        return formatoRepository.findAll();
     } 
 
     public Optional<FormatoEntity> getFormatoById(long id){
         return  formatoRepository.findById(id);
     }
 
-    public  List<FormatoEntity> updateFormato(FormatoEntity FormatosEntity){
-        return (List<FormatoEntity>) formatoRepository.save(FormatosEntity); 
+    public FormatoEntity updateFormato(FormatoEntity formatosEntity){
+        return formatoRepository.save(formatosEntity); 
     }
 
-    public List<FormatoEntity> createFormato(FormatoEntity formatoEntity){
-        return (List<FormatoEntity>) formatoRepository.save(formatoEntity);
+    public FormatoEntity createFormato(FormatoEntity formatoEntity){
+        return formatoRepository.save(formatoEntity);
     }
 
-    public Optional<FormatoEntity> deleteFormatoById(long id){
+    public void deleteFormatoById(long id){
         formatoRepository.deleteById(id);
-        return null;
     }
 }

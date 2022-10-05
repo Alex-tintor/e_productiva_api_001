@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,41 +20,45 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/programas") 
+@RequestMapping("/api/programasFormacion")
 public class ProgramasFormacionController {
     @Autowired
     ProgramasFormacionService programasFormacionService;
 
-    @GetMapping("/programasFormacion")
-    public @ResponseBody ResponseEntity<?> getAllProgramasFormacion(){
+    @GetMapping("/")
+    public @ResponseBody ResponseEntity<?> getAllProgramasFormacion() {
         List<ProgramasFormacionEntity> response = programasFormacionService.getAllProgramasFormacion();
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/programasFormacion/{id}")
+    @GetMapping("/{id}")
     public @ResponseBody ResponseEntity<?> getProgramasFormacionById(@PathVariable("id") long id) {
         Optional<ProgramasFormacionEntity> response = programasFormacionService.getProgramasFormacionById(id);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/programasFormacion/{id}")
-    public @ResponseBody ResponseEntity<String> updateProgamaFormacion(@PathVariable("id") long id){
-        return new ResponseEntity<>("se ha actualizado el programa de formacion", HttpStatus.OK);
-    } 
-
-    @PostMapping("/programasFormacion")
-    public @ResponseBody ResponseEntity<String> createProgramasFormacion() {
-        return new ResponseEntity<>("se ha creado el centro de formacion", HttpStatus.CREATED);
+    @PutMapping("/")
+    public @ResponseBody ResponseEntity<?> updateFichas(@RequestBody ProgramasFormacionEntity programasFormacionEntity) {
+        ProgramasFormacionEntity response = programasFormacionService.createFicha(programasFormacionEntity);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping("/programasFormacion/{id}")
-    public @ResponseBody ResponseEntity<String> dropProgramasFormacion(@PathVariable("id") String id) {
-        return new ResponseEntity<>("se borro exitosamente el centro de formacion", HttpStatus.ACCEPTED);
+    @PostMapping("/{id}")
+    public @ResponseBody ResponseEntity<?> createFicha(@RequestBody ProgramasFormacionEntity programasFormacionEntity,
+            @PathVariable("id") long id) {
+        ProgramasFormacionEntity response = programasFormacionService.createFicha(programasFormacionEntity);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/{id}")
+    public @ResponseBody ResponseEntity<?> deleteFichaById(@PathVariable("id") long id) {
+        programasFormacionService.deleteFichaById(id);
+        return new ResponseEntity<>("ficha Inhabilitada con exito", HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/health")
     public @ResponseBody ResponseEntity<String> health() {
         return new ResponseEntity<>("ok", HttpStatus.ACCEPTED);
     }
-    
+
 }

@@ -13,19 +13,30 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 @Entity
-@Table(name = "programas_de_formacion")
-public class ProgramasFormacionEntity {
+@Table(name = "instructores")
+public class InstructorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private long id;
+    private long cc;
 
-    @Column(length = 75, nullable = false)
-    @Size(min = 5,max = 255)
+    @Column(nullable = false)
+    @Size(min = 3,max = 45)
     private String nombre;
 
+    @Column(nullable = false)
+    @Size(min = 3,max = 45)
+    private String apellido;
+
+    @Column(nullable = false)
+    @Size(min = 10,max = 45)
+    private String correo;
+
+    @Column(nullable = false)
+    private int telefono;
+
+    @Column(nullable = false)
     private boolean enabled;
+
 }

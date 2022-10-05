@@ -12,26 +12,25 @@ import java.util.Optional;
 @Service
 public class ProgramasFormacionService {
     @Autowired
-    ProgramasFormacionRepository programasFormacionRepository;
+    private ProgramasFormacionRepository programasFormacionRepository;
 
-    public List<ProgramasFormacionEntity> getAllProgramasFormacion(){
-        return (List<ProgramasFormacionEntity>) programasFormacionRepository.findAll();
+    public List<ProgramasFormacionEntity> getAllProgramasFormacion() {
+        return programasFormacionRepository.findAll();
     }
 
-    public Optional<ProgramasFormacionEntity> getProgramasFormacionById(long id){
+    public Optional<ProgramasFormacionEntity> getProgramasFormacionById(long id) {
         return programasFormacionRepository.findById(id);
     }
 
-    public  List<ProgramasFormacionEntity> updateFicha(ProgramasFormacionEntity programasFormacionEntity){
-        return (List<ProgramasFormacionEntity>) programasFormacionRepository.save(programasFormacionEntity); 
+    public ProgramasFormacionEntity updateFicha(ProgramasFormacionEntity programasFormacionEntity) {
+        return programasFormacionRepository.save(programasFormacionEntity);
     }
 
-    public List<ProgramasFormacionEntity> createFicha(ProgramasFormacionEntity programasFormacionEntity){
-        return (List<ProgramasFormacionEntity>) programasFormacionRepository.save(programasFormacionEntity);
+    public ProgramasFormacionEntity createFicha(ProgramasFormacionEntity programasFormacionEntity) {
+        return programasFormacionRepository.save(programasFormacionEntity);
     }
 
-    public Optional<ProgramasFormacionEntity> deleteFichaById(long id){
+    public void deleteFichaById(long id) {
         programasFormacionRepository.deleteById(id);
-        return null;
     }
 }

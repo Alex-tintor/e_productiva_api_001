@@ -8,32 +8,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-
 @Entity
-@Table(name="fichas")
+@Table(name = "fichas")
 public class FichasEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(unique = true,nullable = false)
-    private String id;
-
-    private long programa_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
+    @Size(min = 1,max = 10)
+    private long id;
 
     @Column(nullable = false)
+    @Size(min = 1,max = 10)
     private String modalidad;
 
-    private int instructor_id;
-
-    private int centro_id;
-    
     @Column(nullable = false)
     private Date inicio;
 
@@ -41,7 +36,6 @@ public class FichasEntity {
     private Date fin;
 
     @Column(nullable = false)
-    private Byte enabled;
+    private boolean enabled;
 
-    
 }

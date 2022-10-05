@@ -12,25 +12,26 @@ import java.util.Optional;
 @Service
 public class CentroFormacionService {
     @Autowired
-    CentroFormacionRepository centroFormacionRepository;
+    private CentroFormacionRepository centroFormacionRepository;
 
-    public List<CentroFormacionEntity> getAllCentroFormacion(){
-        return (List<CentroFormacionEntity>) centroFormacionRepository.findAll();
-    } 
-    public Optional<CentroFormacionEntity> getCentroFormacionById(long id){
-        return  centroFormacionRepository.findById(id);
+    public List<CentroFormacionEntity> getAllCentroFormacion() {
+        return centroFormacionRepository.findAll();
     }
 
-    public  List<CentroFormacionEntity> updateFicha(CentroFormacionEntity centroFormacionEntity){
-        return (List<CentroFormacionEntity>) centroFormacionRepository.save(centroFormacionEntity); 
+    public Optional<CentroFormacionEntity> getCentroFormacionById(long id) {
+        return centroFormacionRepository.findById(id);
     }
 
-    public List<CentroFormacionEntity> createFicha(CentroFormacionEntity centroFormacionEntity){
-        return (List<CentroFormacionEntity>) centroFormacionRepository.save(centroFormacionEntity);
+    public CentroFormacionEntity updateCentro(CentroFormacionEntity centroFormacionEntity) {
+        return centroFormacionRepository.save(centroFormacionEntity);
     }
 
-    public Optional<CentroFormacionEntity> deleteFichaById(long id){
+    public CentroFormacionEntity createCentro(CentroFormacionEntity centroFormacionEntity) {
+        return centroFormacionRepository.save(centroFormacionEntity);
+    }
+
+    public void deleteCentro(long id) {
         centroFormacionRepository.deleteById(id);
-        return null;
     }
+
 }

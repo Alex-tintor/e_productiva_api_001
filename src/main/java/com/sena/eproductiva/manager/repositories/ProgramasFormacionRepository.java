@@ -1,12 +1,13 @@
 package com.sena.eproductiva.manager.repositories;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import com.sena.eproductiva.manager.models.dao.entitys.ProgramasFormacionEntity;
 
 
 @Repository
-public interface ProgramasFormacionRepository extends CrudRepository<ProgramasFormacionEntity, Long> {
+public interface ProgramasFormacionRepository extends JpaRepository<ProgramasFormacionEntity, Long>, JpaSpecificationExecutor<ProgramasFormacionEntity> {
     
 }
