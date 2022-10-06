@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,6 +24,10 @@ public class FormatoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
     private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "instructorCc")
+    InstructorEntity instructorEntity;
 
     @Column(nullable = false)
     private Date fecha;

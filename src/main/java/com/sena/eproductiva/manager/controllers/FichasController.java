@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sena.eproductiva.manager.models.dao.entitys.FichasEntity;
+import com.sena.eproductiva.manager.models.dao.entitys.FichaEntity;
 import com.sena.eproductiva.manager.services.FichasService;
 
 @RestController
@@ -28,26 +28,26 @@ public class FichasController {
 
     @GetMapping("/")
     public @ResponseBody ResponseEntity<?> getAllFichas() {
-        List<FichasEntity> response = fichasService.getAllFichas();
+        List<FichaEntity> response = fichasService.getAllFichas();
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/{id}")
     public @ResponseBody ResponseEntity<?> getFichasById(@PathVariable("id") long id) {
-        Optional<FichasEntity> response = fichasService.getFichaById(id);
+        Optional<FichaEntity> response = fichasService.getFichaById(id);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/")
-    public @ResponseBody ResponseEntity<?> updateFichas(@RequestBody FichasEntity fichasEntity) {
-        FichasEntity response = fichasService.createFicha(fichasEntity);
+    public @ResponseBody ResponseEntity<?> updateFichas(@RequestBody FichaEntity fichasEntity) {
+        FichaEntity response = fichasService.createFicha(fichasEntity);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/{id}")
-    public @ResponseBody ResponseEntity<?> createFicha(@RequestBody FichasEntity fichasEntity,
+    public @ResponseBody ResponseEntity<?> createFicha(@RequestBody FichaEntity fichasEntity,
             @PathVariable("id") long id) {
-        FichasEntity response = fichasService.createFicha(fichasEntity);
+        FichaEntity response = fichasService.createFicha(fichasEntity);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 

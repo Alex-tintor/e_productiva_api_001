@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sena.eproductiva.manager.models.dao.entitys.AprendicesEntity;
+import com.sena.eproductiva.manager.models.dao.entitys.AprendizEntity;
 import com.sena.eproductiva.manager.repositories.AprendicesRepository;
 
 @Service
@@ -15,19 +15,19 @@ public class AprendicesService {
     @Autowired
     private AprendicesRepository aprendicesRepository;
 
-    public List<AprendicesEntity> getAllPrendices(){
+    public List<AprendizEntity> getAllPrendices(){
         return aprendicesRepository.findAll();
     }
 
-    public Optional<AprendicesEntity> getAprendicesById(long id){
+    public Optional<AprendizEntity> getAprendicesById(long id){
         return aprendicesRepository.findById(id);
     }
 
-    public AprendicesEntity updateAprendiz(AprendicesEntity aprendicesEntity){
+    public AprendizEntity updateAprendiz(AprendizEntity aprendicesEntity){
         return aprendicesRepository.save(aprendicesEntity);
     }
 
-    public AprendicesEntity createAprendiz(AprendicesEntity aprendicesEntity){
+    public AprendizEntity createAprendiz(AprendizEntity aprendicesEntity){
         return aprendicesRepository.save(aprendicesEntity);
     }
 

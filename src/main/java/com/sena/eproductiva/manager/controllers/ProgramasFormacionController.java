@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sena.eproductiva.manager.models.dao.entitys.ProgramasFormacionEntity;
+import com.sena.eproductiva.manager.models.dao.entitys.ProgramaFormacionEntity;
 import com.sena.eproductiva.manager.services.ProgramasFormacionService;
 
 import java.util.List;
@@ -27,26 +27,26 @@ public class ProgramasFormacionController {
 
     @GetMapping("/")
     public @ResponseBody ResponseEntity<?> getAllProgramasFormacion() {
-        List<ProgramasFormacionEntity> response = programasFormacionService.getAllProgramasFormacion();
+        List<ProgramaFormacionEntity> response = programasFormacionService.getAllProgramasFormacion();
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/{id}")
     public @ResponseBody ResponseEntity<?> getProgramasFormacionById(@PathVariable("id") long id) {
-        Optional<ProgramasFormacionEntity> response = programasFormacionService.getProgramasFormacionById(id);
+        Optional<ProgramaFormacionEntity> response = programasFormacionService.getProgramasFormacionById(id);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/")
-    public @ResponseBody ResponseEntity<?> updateFichas(@RequestBody ProgramasFormacionEntity programasFormacionEntity) {
-        ProgramasFormacionEntity response = programasFormacionService.createFicha(programasFormacionEntity);
+    public @ResponseBody ResponseEntity<?> updateFichas(@RequestBody ProgramaFormacionEntity programasFormacionEntity) {
+        ProgramaFormacionEntity response = programasFormacionService.createFicha(programasFormacionEntity);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/{id}")
-    public @ResponseBody ResponseEntity<?> createFicha(@RequestBody ProgramasFormacionEntity programasFormacionEntity,
+    public @ResponseBody ResponseEntity<?> createFicha(@RequestBody ProgramaFormacionEntity programasFormacionEntity,
             @PathVariable("id") long id) {
-        ProgramasFormacionEntity response = programasFormacionService.createFicha(programasFormacionEntity);
+        ProgramaFormacionEntity response = programasFormacionService.createFicha(programasFormacionEntity);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 

@@ -3,7 +3,7 @@ package com.sena.eproductiva.manager.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sena.eproductiva.manager.models.dao.entitys.ProgramasFormacionEntity;
+import com.sena.eproductiva.manager.models.dao.entitys.ProgramaFormacionEntity;
 import com.sena.eproductiva.manager.repositories.ProgramasFormacionRepository;
 
 import java.util.List;
@@ -14,19 +14,19 @@ public class ProgramasFormacionService {
     @Autowired
     private ProgramasFormacionRepository programasFormacionRepository;
 
-    public List<ProgramasFormacionEntity> getAllProgramasFormacion() {
+    public List<ProgramaFormacionEntity> getAllProgramasFormacion() {
         return programasFormacionRepository.findAll();
     }
 
-    public Optional<ProgramasFormacionEntity> getProgramasFormacionById(long id) {
+    public Optional<ProgramaFormacionEntity> getProgramasFormacionById(long id) {
         return programasFormacionRepository.findById(id);
     }
 
-    public ProgramasFormacionEntity updateFicha(ProgramasFormacionEntity programasFormacionEntity) {
+    public ProgramaFormacionEntity updateFicha(ProgramaFormacionEntity programasFormacionEntity) {
         return programasFormacionRepository.save(programasFormacionEntity);
     }
 
-    public ProgramasFormacionEntity createFicha(ProgramasFormacionEntity programasFormacionEntity) {
+    public ProgramaFormacionEntity createFicha(ProgramaFormacionEntity programasFormacionEntity) {
         return programasFormacionRepository.save(programasFormacionEntity);
     }
 

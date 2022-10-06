@@ -4,10 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import com.sena.eproductiva.manager.models.dao.entitys.ProgramasFormacionEntity;
+import com.sena.eproductiva.manager.models.dao.entitys.ProgramaFormacionEntity;
 
 
 @Repository
-public interface ProgramasFormacionRepository extends JpaRepository<ProgramasFormacionEntity, Long>, JpaSpecificationExecutor<ProgramasFormacionEntity> {
+public interface ProgramasFormacionRepository extends JpaRepository<ProgramaFormacionEntity, Long>, JpaSpecificationExecutor<ProgramaFormacionEntity> {
     
 }

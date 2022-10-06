@@ -8,41 +8,42 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
 
+
+
 @Getter
 @Setter
 @Entity
-@Table(name = "instructores")
-public class InstructorEntity {
+@Table(name = "aprendices")
+public class AprendizEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long cc;
+    @Column(unique = true,nullable = false)
+    private long cC;
 
     @Column(nullable = false)
-    @Size(min = 3,max = 45)
     private String nombre;
 
     @Column(nullable = false)
-    @Size(min = 3,max = 45)
     private String apellido;
 
     @Column(nullable = false)
-    @Size(min = 10,max = 45)
-    private String correo;
+    private String email;
 
     @Column(nullable = false)
-    private int telefono;
+    private long telefono;
 
     @ManyToOne
-    @JoinColumn(name = "centroId")
-    private CentroFormacionEntity centroFormacionEntity;
+    @JoinColumn(name = "fichaId")
+    private FichaEntity fichaEntity;
 
-    @Column(nullable = false)
-    private boolean enabled;
+    @Column(nullable=false)
+    private String etapa;
 
+    private boolean enabled = true;
+    
 }
