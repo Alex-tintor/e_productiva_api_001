@@ -1,4 +1,4 @@
-package com.sena.eproductiva.manager.models.dao.entitys;
+package com.sena.eproductiva.manager.models.entitys;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,38 +12,33 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-
-
 @Getter
 @Setter
 @Entity
-@Table(name = "aprendices")
-public class AprendizEntity {
+@Table(name = "instructores")
+public class InstructorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true,nullable = false)
-    private long cC;
+    private long cc;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 45)
     private String nombre;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 45)
     private String apellido;
 
     @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
-    private long telefono;
+    private int telefono;
 
     @ManyToOne
-    @JoinColumn(name = "fichaId")
-    private FichaEntity fichaEntity;
+    @JoinColumn(name = "centroId")
+    private CentroFormacionEntity centroFormacionEntity;
 
-    @Column(nullable=false)
-    private String etapa;
+    @Column(nullable = false)
+    private boolean enabled;
 
-    private boolean enabled = true;
-    
 }

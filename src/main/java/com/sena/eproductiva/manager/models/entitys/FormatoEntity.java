@@ -1,4 +1,4 @@
-package com.sena.eproductiva.manager.models.dao.entitys;
+package com.sena.eproductiva.manager.models.entitys;
 
 import java.sql.Date;
 
@@ -22,7 +22,6 @@ public class FormatoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, unique = true)
     private long id;
 
     @ManyToOne

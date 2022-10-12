@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sena.eproductiva.manager.models.dao.entitys.FormatoEntity;
+import com.sena.eproductiva.manager.models.entitys.FormatoEntity;
 import com.sena.eproductiva.manager.services.FormatoService;
 
 import java.util.List;

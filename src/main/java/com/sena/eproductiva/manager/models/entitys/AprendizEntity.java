@@ -1,4 +1,4 @@
-package com.sena.eproductiva.manager.models.dao.entitys;
+package com.sena.eproductiva.manager.models.entitys;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,33 +15,32 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "instructores")
-public class InstructorEntity {
+@Table(name = "aprendices")
+public class AprendizEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long cc;
+    private long cedula;
 
     @Column(nullable = false)
-    @Size(min = 3,max = 45)
     private String nombre;
 
-    @Column(nullable = false)
-    @Size(min = 3,max = 45)
+    @Column(nullable = false, length = 45)
     private String apellido;
 
-    @Column(nullable = false)
-    @Size(min = 10,max = 45)
-    private String correo;
+    @Column(nullable = false, length = 45)
+    private String email;
 
     @Column(nullable = false)
-    private int telefono;
+    private long telefono;
 
     @ManyToOne
-    @JoinColumn(name = "centroId")
-    private CentroFormacionEntity centroFormacionEntity;
+    @JoinColumn(name = "fichaId")
+    private FichaEntity fichaEntity;
 
     @Column(nullable = false)
-    private boolean enabled;
+    private String etapa;
+
+    private boolean enabled = true;
 
 }

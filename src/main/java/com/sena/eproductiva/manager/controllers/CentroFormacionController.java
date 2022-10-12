@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sena.eproductiva.manager.models.dao.entitys.CentroFormacionEntity;
+import com.sena.eproductiva.manager.models.entitys.CentroFormacionEntity;
 import com.sena.eproductiva.manager.services.CentroFormacionService;
 
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,10 +22,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController // lo registra como controlador
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/centrodeformacion") // la ruta que controla = localhost:8080/api/v1
 public class CentroFormacionController {
     @Autowired
-    CentroFormacionService centroFormacionService;
+    private CentroFormacionService centroFormacionService;
 
     @GetMapping("/")
     public @ResponseBody ResponseEntity<?> getAllCentroFormacion() {
@@ -44,7 +46,7 @@ public class CentroFormacionController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/{centroEntity}")
     public @ResponseBody ResponseEntity<?> createCentroFormacion(@RequestBody CentroFormacionEntity centroEntity){
         CentroFormacionEntity response = centroFormacionService.createCentro(centroEntity);
         return new ResponseEntity<>(response, HttpStatus.CREATED);

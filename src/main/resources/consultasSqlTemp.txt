@@ -1,0 +1,5 @@
+insert into db_e_productiva_003.aprendices(apellido,email,enabled,etapa,nombre,telefono,ficha_id) values("ramirezz caicedo","ramirez@gmail.com",b'1',"practica","pacheco maradona",1414131231,1);
+
+select * from db_e_productiva_003.aprendices as a join fichas as f where a.ficha_id = f.id;
+
+select cc, apellido, nombre, telefono ,email, etapa from db_e_productiva_003.aprendices as a join fichas as f where a.ficha_id - f.id;

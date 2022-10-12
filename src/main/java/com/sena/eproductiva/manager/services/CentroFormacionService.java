@@ -3,7 +3,7 @@ package com.sena.eproductiva.manager.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sena.eproductiva.manager.models.dao.entitys.CentroFormacionEntity;
+import com.sena.eproductiva.manager.models.entitys.CentroFormacionEntity;
 import com.sena.eproductiva.manager.repositories.CentroFormacionRepository;
 
 import java.util.List;
