@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sena.eproductiva.manager.models.dto.FichaDto;
 import com.sena.eproductiva.manager.models.entitys.FichaEntity;
 import com.sena.eproductiva.manager.services.FichasService;
 
@@ -29,8 +30,8 @@ public class FichasController {
     private FichasService fichasService;
 
     @GetMapping("/")
-    public @ResponseBody ResponseEntity<?> getAllFichas() {
-        List<FichaEntity> response = fichasService.getAllFichas();
+    public @ResponseBody ResponseEntity<List<FichaDto>> getAllFichas() {
+        List<FichaDto> response = fichasService.getAllFichaDtos();
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
