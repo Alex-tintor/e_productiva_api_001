@@ -3,11 +3,13 @@ package com.sena.eproductiva.manager.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sena.eproductiva.manager.models.dto.CentroFormacionDto;
 import com.sena.eproductiva.manager.models.entitys.CentroFormacionEntity;
 import com.sena.eproductiva.manager.repositories.CentroFormacionRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CentroFormacionService {
@@ -32,6 +34,16 @@ public class CentroFormacionService {
 
     public void deleteCentro(long id) {
         centroFormacionRepository.deleteById(id);
+    }
+
+    public List<CentroFormacionDto> getAllCentroFormacionDtos(){
+        return this.getAllCentroFormacion().stream().map(centro->{
+            CentroFormacionDto dto = new CentroFormacionDto();
+            dto.setUuid(centro.getUuid());
+            dto.setNombre(centro.getNombre());
+            dto.setEnabled(centro.isEnabled());
+            return dto;
+        }).collect(Collectors.toList());
     }
 
 }

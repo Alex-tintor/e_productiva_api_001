@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sena.eproductiva.manager.models.dto.CentroFormacionDto;
 import com.sena.eproductiva.manager.models.entitys.CentroFormacionEntity;
 import com.sena.eproductiva.manager.services.CentroFormacionService;
 
@@ -28,9 +29,9 @@ public class CentroFormacionController {
     @Autowired
     private CentroFormacionService centroFormacionService;
 
-    @GetMapping("/")
-    public @ResponseBody ResponseEntity<?> getAllCentroFormacion() {
-        List<CentroFormacionEntity> response = centroFormacionService.getAllCentroFormacion(); 
+    @GetMapping()
+    public @ResponseBody ResponseEntity<List<CentroFormacionDto>> getAllCentroFormacion() {
+        List<CentroFormacionDto> response = centroFormacionService.getAllCentroFormacionDtos(); 
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 

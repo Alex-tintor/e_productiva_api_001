@@ -37,8 +37,8 @@ public class AprendicesController {
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody ResponseEntity<?> getAprendicesById(@PathVariable("id") long id) {
-        Optional<AprendizEntity> response = aprendicesService.getAprendicesById(id);
+    public @ResponseBody ResponseEntity<List<AprendizDto>> getAprendicesById(@PathVariable("id") long id) {
+        List<AprendizDto> response = aprendicesService.getAprendizDtoById(id);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 

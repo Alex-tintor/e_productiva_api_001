@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sena.eproductiva.manager.models.dto.InstructorDto;
 import com.sena.eproductiva.manager.models.entitys.InstructorEntity;
 import com.sena.eproductiva.manager.services.InstructorService;
 
@@ -27,9 +28,9 @@ public class InstructorController {
     @Autowired
     InstructorService instructorService;
 
-    @GetMapping("/")
-    public @ResponseBody ResponseEntity<?> getAllFormatos() {
-        List<InstructorEntity> response = instructorService.getAllInstructores();
+    @GetMapping()
+    public @ResponseBody ResponseEntity<List<InstructorDto>> getAllFormatos() {
+        List<InstructorDto> response = instructorService.getAllInstructorDtos();
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
