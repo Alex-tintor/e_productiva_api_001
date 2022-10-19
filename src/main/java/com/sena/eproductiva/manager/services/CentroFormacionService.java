@@ -8,7 +8,6 @@ import com.sena.eproductiva.manager.models.entitys.Centro;
 import com.sena.eproductiva.manager.repositories.CentroFormacionRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,8 +19,8 @@ public class CentroFormacionService {
         return centroFormacionRepository.findAll();
     }
 
-    public Optional<Centro> getCentroFormacionById(long id) {
-        return centroFormacionRepository.findById(id);
+    public Centro getCentroFormacionById(long id) {
+        return centroFormacionRepository.findById(id).orElse(null);
     }
 
     public Centro updateCentro(Centro centroFormacionEntity) {
@@ -36,8 +35,8 @@ public class CentroFormacionService {
         centroFormacionRepository.deleteById(id);
     }
 
-    public List<CentroFormacionDto> getAllCentroFormacionDtos(){
-        return this.getAllCentroFormacion().stream().map(centro->{
+    public List<CentroFormacionDto> getAllCentroFormacionDtos() {
+        return this.getAllCentroFormacion().stream().map(centro -> {
             CentroFormacionDto dto = new CentroFormacionDto();
             dto.setUuid(centro.getUuid());
             dto.setNombre(centro.getNombre());

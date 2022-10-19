@@ -1,13 +1,6 @@
 package com.sena.eproductiva.manager.services;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.sena.eproductiva.manager.models.entitys.Aprendiz;
-import com.sena.eproductiva.manager.repositories.AprendicesRepository;
 
 @Service
 public class AprendicesService {

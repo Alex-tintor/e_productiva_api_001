@@ -1,6 +1,7 @@
 package com.sena.eproductiva.manager.services;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.sena.eproductiva.manager.models.dto.InstructorDto;
 import com.sena.eproductiva.manager.models.dto.PageDto;
 import com.sena.eproductiva.manager.models.entitys.Instructor;
+import com.sena.eproductiva.manager.models.enums.DocumentoType;
 import com.sena.eproductiva.manager.repositories.InstructorRepository;
 
 @Service
@@ -18,6 +20,9 @@ public class InstructorService {
 
     @Autowired
     private InstructorRepository instructorRepository;
+
+    @Autowired
+    private CentroFormacionService centroFormacionService;
 
     public List<Instructor> getInstructores() {
         return instructorRepository.findAll();
@@ -29,6 +34,19 @@ public class InstructorService {
 
     public Instructor getInstructorByDocumento(String documento) {
         return instructorRepository.findByDocumento(documento).orElse(null);
+    }
+
+    public Instructor createInstructor(InstructorDto instructorDto) {
+        Instructor instructor = new Instructor();
+        instructor.setApellido(instructorDto.getApellido());
+        instructor.setNombre(instructorDto.getNombre());
+        instructor.setCentro(centroFormacionService.getCentroFormacionById(instructorDto.getCentro()));
+        instructor.setDocumento(instructorDto.getDocumento());
+        instructor.setEmail(instructorDto.getEmail());
+        instructor.setEnabled(true);
+        instructor.setTelefono(instructorDto.getTelefono());
+        instructor.setType(DocumentoType.valueOf(instructorDto.getDocumentoType()));
+        return instructorRepository.save(instructor);
     }
 
     public InstructorDto transformDto(Instructor instructor) {
@@ -57,6 +75,12 @@ public class InstructorService {
         PageDto<InstructorDto> pageDto = new PageDto<>(instructores);
         pageDto.setContent(this.transformListDto(instructores.getContent()));
         return pageDto;
+    }
+
+    public boolean validarExistencia(InstructorDto instructor) {
+        return Objects.nonNull(getInstructorByDocumento(instructor.getTelefono()))
+                || Objects.nonNull(getInstructorByDocumento(instructor.getDocumento()))
+                || Objects.nonNull(getInstructorByDocumento(instructor.getEmail()));
     }
 
 }
