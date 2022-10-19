@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sena.eproductiva.manager.models.entitys.FormatoEntity;
+import com.sena.eproductiva.manager.models.entitys.Formato;
 import com.sena.eproductiva.manager.repositories.FormatoRepository;
 
 @Service
@@ -15,19 +15,19 @@ public class FormatoService {
     @Autowired
     private FormatoRepository formatoRepository;
 
-    public List<FormatoEntity> getAllFormato(){
+    public List<Formato> getAllFormato(){
         return formatoRepository.findAll();
     } 
 
-    public Optional<FormatoEntity> getFormatoById(long id){
+    public Optional<Formato> getFormatoById(long id){
         return  formatoRepository.findById(id);
     }
 
-    public FormatoEntity updateFormato(FormatoEntity formatosEntity){
+    public Formato updateFormato(Formato formatosEntity){
         return formatoRepository.save(formatosEntity); 
     }
 
-    public FormatoEntity createFormato(FormatoEntity formatoEntity){
+    public Formato createFormato(Formato formatoEntity){
         return formatoRepository.save(formatoEntity);
     }
 

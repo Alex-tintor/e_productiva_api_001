@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sena.eproductiva.manager.models.dto.InstructorDto;
-import com.sena.eproductiva.manager.models.entitys.InstructorEntity;
+import com.sena.eproductiva.manager.models.entitys.Instructor;
 import com.sena.eproductiva.manager.repositories.InstructorRepository;
 
 @Service
@@ -18,19 +18,19 @@ public class InstructorService {
     private InstructorRepository instructorRepository;
 
     
-    public List<InstructorEntity> getAllInstructores(){
+    public List<Instructor> getAllInstructores(){
         return instructorRepository.findAll();
     } 
 
-    public Optional<InstructorEntity> getInstructorById(long id){
+    public Optional<Instructor> getInstructorById(long id){
         return  instructorRepository.findById(id);
     }
 
-    public InstructorEntity updateInstructor(InstructorEntity instructorEntity){
+    public Instructor updateInstructor(Instructor instructorEntity){
         return instructorRepository.save(instructorEntity); 
     }
 
-    public InstructorEntity createInstructor(InstructorEntity instructorEntity){
+    public Instructor createInstructor(Instructor instructorEntity){
         return instructorRepository.save(instructorEntity);
     }
 

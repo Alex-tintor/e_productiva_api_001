@@ -1,7 +1,5 @@
 package com.sena.eproductiva.manager.models.entitys;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,38 +9,36 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "fichas")
-public class FichaEntity {
+@Table(name = "instructores")
+public class Instructor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long cc;
 
-    @ManyToOne
-    @JoinColumn(name = "programaId")
-    ProgramaFormacionEntity programaFormacionEntity;
+    @Column(nullable = false, length = 45)
+    private String nombre;
 
-    @Column(nullable = false, length = 30)
-    private String modalidad;
+    @Column(nullable = false, length = 45)
+    private String apellido;
 
-    @ManyToOne
-    @JoinColumn(name = "instructorCc")
-    InstructorEntity instructorEntity;
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private int telefono;
 
     @ManyToOne
     @JoinColumn(name = "centroId")
-    CentroFormacionEntity centroFormacionEntity;
+    private Centro centroFormacionEntity;
 
     @Column(nullable = false)
-    private Date inicio;
-
-    @Column(nullable = false)
-    private Date fin;
-
     private boolean enabled;
 
 }

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sena.eproductiva.manager.models.dto.CentroFormacionDto;
-import com.sena.eproductiva.manager.models.entitys.CentroFormacionEntity;
+import com.sena.eproductiva.manager.models.entitys.Centro;
 import com.sena.eproductiva.manager.repositories.CentroFormacionRepository;
 
 import java.util.List;
@@ -16,19 +16,19 @@ public class CentroFormacionService {
     @Autowired
     private CentroFormacionRepository centroFormacionRepository;
 
-    public List<CentroFormacionEntity> getAllCentroFormacion() {
+    public List<Centro> getAllCentroFormacion() {
         return centroFormacionRepository.findAll();
     }
 
-    public Optional<CentroFormacionEntity> getCentroFormacionById(long id) {
+    public Optional<Centro> getCentroFormacionById(long id) {
         return centroFormacionRepository.findById(id);
     }
 
-    public CentroFormacionEntity updateCentro(CentroFormacionEntity centroFormacionEntity) {
+    public Centro updateCentro(Centro centroFormacionEntity) {
         return centroFormacionRepository.save(centroFormacionEntity);
     }
 
-    public CentroFormacionEntity createCentro(CentroFormacionEntity centroFormacionEntity) {
+    public Centro createCentro(Centro centroFormacionEntity) {
         return centroFormacionRepository.save(centroFormacionEntity);
     }
 

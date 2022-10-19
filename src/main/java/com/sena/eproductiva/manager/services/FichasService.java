@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sena.eproductiva.manager.models.dto.FichaDto;
-import com.sena.eproductiva.manager.models.entitys.FichaEntity;
+import com.sena.eproductiva.manager.models.entitys.Ficha;
 import com.sena.eproductiva.manager.repositories.FichasRepository;
 
 @Service
@@ -17,19 +17,19 @@ public class FichasService {
     @Autowired
     private FichasRepository fichasRepository;
 
-    public List<FichaEntity> getAllFichas() {
+    public List<Ficha> getAllFichas() {
         return fichasRepository.findAll();
     }
 
-    public Optional<FichaEntity> getFichaById(long id) {
+    public Optional<Ficha> getFichaById(long id) {
         return fichasRepository.findById(id);
     }
 
-    public FichaEntity updateFicha(FichaEntity fichasEntity) {
+    public Ficha updateFicha(Ficha fichasEntity) {
         return fichasRepository.save(fichasEntity);
     }
 
-    public FichaEntity createFicha(FichaEntity fichasEntity) {
+    public Ficha createFicha(Ficha fichasEntity) {
         return fichasRepository.save(fichasEntity);
     }
 
