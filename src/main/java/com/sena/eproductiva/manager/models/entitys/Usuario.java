@@ -22,7 +22,7 @@ public class Usuario {
     @Column(length = 36)
     private String uuid;
 
-    @Column(nullable = false, length = 12)
+    @Column(nullable = false, length = 12, unique = true)
     private String documento;
 
     @Column(nullable = false, length = 45)
@@ -31,10 +31,10 @@ public class Usuario {
     @Column(nullable = false, length = 45)
     private String apellido;
 
-    @Column(nullable = false, length = 70)
+    @Column(nullable = false, length = 70, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 11)
+    @Column(nullable = false, length = 11, unique = true)
     private String telefono;
 
     @Column(nullable = false)

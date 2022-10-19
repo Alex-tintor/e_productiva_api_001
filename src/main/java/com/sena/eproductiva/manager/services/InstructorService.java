@@ -27,6 +27,10 @@ public class InstructorService {
         return instructorRepository.findById(uuid).orElse(null);
     }
 
+    public Instructor getInstructorByDocumento(String documento) {
+        return instructorRepository.findByDocumento(documento).orElse(null);
+    }
+
     public InstructorDto transformDto(Instructor instructor) {
         InstructorDto dto = new InstructorDto();
         dto.setApellido(instructor.getApellido());
@@ -48,11 +52,11 @@ public class InstructorService {
         return instructorRepository.findAll(pageable);
     }
 
-    public PageDto<InstructorDto> getPageDtoInstructores(int page, int size){
+    public PageDto<InstructorDto> getPageDtoInstructores(int page, int size) {
         Page<Instructor> instructores = getPageInstructores(PageRequest.of(page, size));
         PageDto<InstructorDto> pageDto = new PageDto<>(instructores);
         pageDto.setContent(this.transformListDto(instructores.getContent()));
         return pageDto;
     }
-    
+
 }

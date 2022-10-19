@@ -2,42 +2,41 @@ package com.sena.eproductiva.manager.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sena.eproductiva.manager.models.dto.AprendizDto;
 import com.sena.eproductiva.manager.models.entitys.Aprendiz;
 import com.sena.eproductiva.manager.repositories.AprendicesRepository;
 
 @Service
 public class AprendicesService {
 
-    @Autowired
-    private AprendicesRepository aprendicesRepository;
-
-    public List<Aprendiz> getAllAprendices() {
-        return aprendicesRepository.findAll();
-    }
-
-    public Optional<Aprendiz> getAprendicesById(long id) {
-        return aprendicesRepository.findById(id);
-    }
-
-    public Aprendiz updateAprendiz(Aprendiz aprendicesEntity) {
-        return aprendicesRepository.save(aprendicesEntity);
-    }
-
-    public Aprendiz createAprendiz(Aprendiz aprendicesEntity) {
-        return aprendicesRepository.save(aprendicesEntity);
-    }
-
-    public void deleteAprendiz(long id) {
-        aprendicesRepository.deleteById(id);
-    }
-
     /*
+     * @Autowired
+     * private AprendicesRepository aprendicesRepository;
+     * 
+     * public List<Aprendiz> getAllAprendices() {
+     * return aprendicesRepository.findAll();
+     * }
+     * 
+     * public Optional<Aprendiz> getAprendicesById(long id) {
+     * return aprendicesRepository.findById(id);
+     * }
+     * 
+     * public Aprendiz updateAprendiz(Aprendiz aprendicesEntity) {
+     * return aprendicesRepository.save(aprendicesEntity);
+     * }
+     * 
+     * public Aprendiz createAprendiz(Aprendiz aprendicesEntity) {
+     * return aprendicesRepository.save(aprendicesEntity);
+     * }
+     * 
+     * public void deleteAprendiz(long id) {
+     * aprendicesRepository.deleteById(id);
+     * }
+     * 
+     * 
      * public List<AprendizDto> getAllAprendizDtos() {
      * return this.getAllAprendices().stream().map(aprendiz -> {
      * AprendizDto dto = new AprendizDto();

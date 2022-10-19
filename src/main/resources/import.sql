@@ -7,13 +7,13 @@ INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede
 INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede G",6);
 INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede H",7);
 -- Usuario
-INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('1056ce12b3694d1baf0d256d8877716c','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,1)
-INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('1eb6f4e724474caf9d8e436885ae79af','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,1)
-INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('b0d3fdc1fd2b43fca1114cac7f673d2e','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,0)
-INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('b4b97cdbeacc430d96989d6baf99b02f','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,0)
-INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('7bfb95b3487643aeb1ce3f0e02fb7544','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,0)
-INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('bcea506d2d8242edb84d1b1f885cb6bc','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,1)
-INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('aaa658bbc5d44b629db7e33aabfbfc05','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,1)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('1056ce12b3694d1baf0d256d8877716c','Zapateiro Guzman','1569253211','zapateira@gmail.com',b'1','David andres',32654541,1)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('1eb6f4e724474caf9d8e436885ae79af','Zapateiro Guzman','1569253212','zapateirb@gmail.com',b'1','David andres',32654542,1)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('b0d3fdc1fd2b43fca1114cac7f673d2e','Zapateiro Guzman','1569253213','zapateirc@gmail.com',b'1','David andres',32654543,0)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('b4b97cdbeacc430d96989d6baf99b02f','Zapateiro Guzman','1569253214','zapateird@gmail.com',b'1','David andres',32654544,0)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('7bfb95b3487643aeb1ce3f0e02fb7544','Zapateiro Guzman','1569253215','zapateire@gmail.com',b'1','David andres',32654545,0)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('bcea506d2d8242edb84d1b1f885cb6bc','Zapateiro Guzman','1569253216','zapateirf@gmail.com',b'1','David andres',32654546,1)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('aaa658bbc5d44b629db7e33aabfbfc05','Zapateiro Guzman','1569253217','zapateirg@gmail.com',b'1','David andres',32654547,1)
 -- Instructores
 INSERT INTO db_e_productiva_003.instructores(uuid,centro_uuid) VALUES ('1056ce12b3694d1baf0d256d8877716c',1);
 INSERT INTO db_e_productiva_003.instructores(uuid,centro_uuid) VALUES ('1eb6f4e724474caf9d8e436885ae79af',2);
