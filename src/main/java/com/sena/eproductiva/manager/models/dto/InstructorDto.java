@@ -1,24 +1,19 @@
 package com.sena.eproductiva.manager.models.dto;
 
-import java.io.Serializable;
-
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class InstructorDto implements Serializable{
+@EqualsAndHashCode(callSuper = false)
+public class InstructorDto extends ResponseDto {
 
-    private long cc;
-
+    private String documento;
+    private String documentoType;
     private String nombre;
-
     private String apellido;
-
     private String email;
-
-    private int telefono;
-
-    private long centroId;
-
+    private String telefono;
+    private long centro;
     private boolean enabled;
-    
+
 }

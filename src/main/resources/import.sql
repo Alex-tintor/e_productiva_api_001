@@ -1,21 +1,28 @@
 -- Centros de Formacion
-insert into db_e_productiva_003.centros (enabled,nombre,uuid) values (b'1',"sede A",1);
-insert into db_e_productiva_003.centros (enabled,nombre,uuid) values (b'1',"sede B",2);
-insert into db_e_productiva_003.centros (enabled,nombre,uuid) values (b'1',"sede D",3);
-insert into db_e_productiva_003.centros (enabled,nombre,uuid) values (b'1',"sede E",4);
-insert into db_e_productiva_003.centros (enabled,nombre,uuid) values (b'1',"sede F",5);
-insert into db_e_productiva_003.centros (enabled,nombre,uuid) values (b'1',"sede G",6);
-insert into db_e_productiva_003.centros (enabled,nombre,uuid) values (b'1',"sede H",7);
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede A",1);
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede B",2);
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede D",3);
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede E",4);
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede F",5);
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede G",6);
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede H",7);
+-- Usuario
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('1056ce12b3694d1baf0d256d8877716c','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,1)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('1eb6f4e724474caf9d8e436885ae79af','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,1)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('b0d3fdc1fd2b43fca1114cac7f673d2e','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,0)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('b4b97cdbeacc430d96989d6baf99b02f','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,0)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('7bfb95b3487643aeb1ce3f0e02fb7544','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,0)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('bcea506d2d8242edb84d1b1f885cb6bc','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,1)
+INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('aaa658bbc5d44b629db7e33aabfbfc05','Zapateiro Guzman','1569253218','zapateiro@gmail.com',b'1','David andres',32654545,1)
 -- Instructores
--- --insert into db_e_productiva_003.instructores(cc,apellido,email,enabled,nombre,telefono,centro_id) values (1569253218,"zapateiro guzman","zapateiro@gmail.com",b'1',"David andres",32654545,1);
--- --insert into db_e_productiva_003.instructores(cc,apellido,email,enabled,nombre,telefono,centro_id) values (37524,"zapateiro guzman","zapateiro@gmail.com",b'1',"David andres",32654545,2);
--- --insert into db_e_productiva_003.instructores(cc,apellido,email,enabled,nombre,telefono,centro_id) values (8734521,"zapateiro guzman","zapateiro@gmail.com",b'1',"David andres",32654545,3);
--- --insert into db_e_productiva_003.instructores(cc,apellido,email,enabled,nombre,telefono,centro_id) values (254367,"zapateiro guzman","zapateiro@gmail.com",b'1',"David andres",32654545,4);
--- --insert into db_e_productiva_003.instructores(cc,apellido,email,enabled,nombre,telefono,centro_id) values (378635438,"zapateiro guzman","zapateiro@gmail.com",b'1',"David andres",32654545,5);
--- --insert into db_e_productiva_003.instructores(cc,apellido,email,enabled,nombre,telefono,centro_id) values (4123534,"zapateiro guzman","zapateiro@gmail.com",b'1',"David andres",32654545,6);
--- --insert into db_e_productiva_003.instructores(cc,apellido,email,enabled,nombre,telefono,centro_id) values (12345678,"zapateiro guzman","zapateiro@gmail.com",b'1',"David andres",32654545,7);
--- --insert into db_e_productiva_003.instructores(cc,apellido,email,enabled,nombre,telefono,centro_id) values (4856543123,"zapateiro guzman","zapateiro@gmail.com",b'1',"David andres",32654545,7);
--- -- Programas de Formacion
+INSERT INTO db_e_productiva_003.instructores(uuid,centro_uuid) VALUES ('1056ce12b3694d1baf0d256d8877716c',1);
+INSERT INTO db_e_productiva_003.instructores(uuid,centro_uuid) VALUES ('1eb6f4e724474caf9d8e436885ae79af',2);
+INSERT INTO db_e_productiva_003.instructores(uuid,centro_uuid) VALUES ('b0d3fdc1fd2b43fca1114cac7f673d2e',3);
+INSERT INTO db_e_productiva_003.instructores(uuid,centro_uuid) VALUES ('b4b97cdbeacc430d96989d6baf99b02f',4);
+INSERT INTO db_e_productiva_003.instructores(uuid,centro_uuid) VALUES ('7bfb95b3487643aeb1ce3f0e02fb7544',5);
+INSERT INTO db_e_productiva_003.instructores(uuid,centro_uuid) VALUES ('bcea506d2d8242edb84d1b1f885cb6bc',6);
+INSERT INTO db_e_productiva_003.instructores(uuid,centro_uuid) VALUES ('aaa658bbc5d44b629db7e33aabfbfc05',7);
+-- Programas de Formacion
 -- --insert into db_e_productiva_003.programas_de_formacion(enabled,nombre,id) values (b'1',"adsi",1);
 -- --insert into db_e_productiva_003.programas_de_formacion(enabled,nombre,id) values (b'1',"tps",2);
 -- --insert into db_e_productiva_003.programas_de_formacion(enabled,nombre,id) values (b'1',"cria de pollitas",3);
