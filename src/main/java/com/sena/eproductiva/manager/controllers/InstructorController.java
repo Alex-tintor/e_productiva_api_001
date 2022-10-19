@@ -12,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -75,33 +77,27 @@ public class InstructorController {
         return new ResponseEntity<>(instructorService.transformDto(instructor), HttpStatus.CREATED);
     }
 
-    /*
-     * @PutMapping("/")
-     * public @ResponseBody ResponseEntity<?> updateFichas(@RequestBody
-     * InstructorEntity instructorEntity) {
-     * InstructorEntity response =
-     * instructorService.createInstructor(instructorEntity);
-     * return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
-     * }
-     * 
-     * @PostMapping("/{id}")
-     * public @ResponseBody ResponseEntity<?> createFicha(@RequestBody
-     * InstructorEntity instructorEntity,
-     * 
-     * @PathVariable("id") long id) {
-     * InstructorEntity response =
-     * instructorService.updateInstructor(instructorEntity);
-     * return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
-     * }
-     * 
-     * @DeleteMapping("/{id}")
-     * public @ResponseBody ResponseEntity<?> deleteFichaById(@PathVariable("id")
-     * long id) {
-     * instructorService.deleteInstructorById(id);
-     * return new ResponseEntity<>("ficha Inhabilitada con exito",
-     * HttpStatus.ACCEPTED);
-     * }
-     */
+    @PutMapping("/{documento}")
+    public @ResponseBody ResponseEntity<ResponseDto> updateInstructor(@PathVariable("documento") String documento,
+            @Valid @ModelAttribute InstructorDto instructorDto, BindingResult validationResult,
+            HttpServletRequest request) {
+        if (validationResult.hasErrors())
+            return messageService.invalidFields(validationResult, request.getRequestURI());
+        if (Objects.isNull(instructorService.getInstructorByDocumento(documento)))
+            return new ResponseEntity<>(new ActionDto("Instructor con el documento: " + documento + " no existe"),
+                    HttpStatus.BAD_REQUEST);
+        Instructor instructor = instructorService.updateInstructor(instructorDto, documento);
+        return new ResponseEntity<>(instructorService.transformDto(instructor), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/{documento}")
+    public @ResponseBody ResponseEntity<ResponseDto> deleteFichaById(@PathVariable("documento") String documento) {
+        if (Objects.isNull(instructorService.getInstructorByDocumento(documento)))
+            return new ResponseEntity<>(new ActionDto("Instructor con el documento: " + documento + " no existe"),
+                    HttpStatus.BAD_REQUEST);
+        instructorService.disableInstructor(documento);
+        return new ResponseEntity<>(new ActionDto("Instructor Inabilitado con exito"), HttpStatus.ACCEPTED);
+    }
 
     @GetMapping("/health")
     public @ResponseBody ResponseEntity<String> health() {

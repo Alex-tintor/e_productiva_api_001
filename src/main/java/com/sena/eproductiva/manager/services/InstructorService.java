@@ -37,7 +37,13 @@ public class InstructorService {
     }
 
     public Instructor createInstructor(InstructorDto instructorDto) {
-        Instructor instructor = new Instructor();
+        return updateInstructor(instructorDto, null);
+    }
+
+    public Instructor updateInstructor(InstructorDto instructorDto,String documento) {
+        Instructor instructor = this.getInstructorByDocumento(documento);
+        if(Objects.isNull(instructor))
+            instructor = new Instructor();
         instructor.setApellido(instructorDto.getApellido());
         instructor.setNombre(instructorDto.getNombre());
         instructor.setCentro(centroFormacionService.getCentroFormacionById(instructorDto.getCentro()));
@@ -81,6 +87,12 @@ public class InstructorService {
         return Objects.nonNull(getInstructorByDocumento(instructor.getTelefono()))
                 || Objects.nonNull(getInstructorByDocumento(instructor.getDocumento()))
                 || Objects.nonNull(getInstructorByDocumento(instructor.getEmail()));
+    }
+
+    public void disableInstructor(String documento){
+        Instructor instructor = getInstructorByDocumento(documento);
+        instructor.setEnabled(false);
+        instructorRepository.save(instructor);
     }
 
 }
