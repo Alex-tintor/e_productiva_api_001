@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,8 +27,10 @@ public class InstructorController {
     private InstructorService instructorService;
 
     @GetMapping()
-    public @ResponseBody ResponseEntity<ResponseDto> getInstructores() {
-        PageDto<InstructorDto> response = instructorService.getPageDtoInstructores(0, 3);
+    public @ResponseBody ResponseEntity<ResponseDto> getInstructores(
+            @RequestHeader("page-number") Integer page,
+            @RequestHeader("page-size") Integer size) {
+        PageDto<InstructorDto> response = instructorService.getPageDtoInstructores(page, size);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
