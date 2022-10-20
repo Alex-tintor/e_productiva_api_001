@@ -1,8 +1,6 @@
 package com.sena.eproductiva.manager.controllers;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,8 +42,7 @@ public class InstructorController {
     private MessageService messageService;
 
     @GetMapping()
-    public @ResponseBody ResponseEntity<ResponseDto> getInstructores(
-            @RequestHeader("page-number") Integer page,
+    public @ResponseBody ResponseEntity<ResponseDto> getInstructores(@RequestHeader("page-number") Integer page,
             @RequestHeader("page-size") Integer size) {
         PageDto<InstructorDto> response = instructorService.getPageDtoInstructores(page, size);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
