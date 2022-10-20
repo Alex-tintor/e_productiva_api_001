@@ -19,8 +19,8 @@ public class FichasService {
         return fichasRepository.findAll();
     }
 
-    public Optional<Ficha> getFichaById(long id) {
-        return fichasRepository.findById(id);
+    public Ficha getFichaById(long id) {
+        return fichasRepository.findById(id).orElse(null);
     }
 
     public Ficha updateFicha(Ficha fichasEntity) {
