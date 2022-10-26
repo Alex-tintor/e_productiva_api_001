@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "centros")
-public class Centro {
+public class Centro extends GeneralEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

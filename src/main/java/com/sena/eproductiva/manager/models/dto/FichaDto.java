@@ -1,28 +1,47 @@
-package com.sena.eproductiva.manager.models.dto;
+ package com.sena.eproductiva.manager.models.dto;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
 @Data
 public class FichaDto implements Serializable {
 
+    @NotBlank
+    @NotEmpty
+    @NotNull
     private long id;
-
-    private long programaId;
-    
+    @NotBlank
+    @NotEmpty
+    @NotNull
+    private String programaId;
+    @NotBlank
+    @NotEmpty
+    @NotNull
     private String modalidad;
-
-    private long instructorCc;
-
+    @NotBlank
+    @NotEmpty
+    @NotNull
+    private String instructor;
+    @NotBlank
+    @NotEmpty
+    @NotNull
     private long centroId;
-
+    @NotBlank
+    @NotEmpty
+    @NotNull
     private Date inicio;
-
+    @NotBlank
+    @NotEmpty
+    @NotNull
     private Date fin;
-
+    @NotBlank
+    @NotEmpty
+    @NotNull
     private boolean enabled;
-    
-    private static final long serialVersionUID = 1L;
 }

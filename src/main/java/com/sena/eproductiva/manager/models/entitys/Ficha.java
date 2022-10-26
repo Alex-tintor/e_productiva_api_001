@@ -1,6 +1,8 @@
 package com.sena.eproductiva.manager.models.entitys;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,11 +18,12 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "fichas")
-public class Ficha {
+public class Ficha extends GeneralEntity {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "programaId")
@@ -30,7 +33,7 @@ public class Ficha {
     private String modalidad;
 
     @ManyToOne
-    @JoinColumn(name = "instructorCc")
+    @JoinColumn(name = "instructor")
     Instructor instructorEntity;
 
     @ManyToOne

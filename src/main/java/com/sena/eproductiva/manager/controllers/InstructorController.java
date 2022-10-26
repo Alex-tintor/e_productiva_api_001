@@ -45,10 +45,11 @@ public class InstructorController {
 
     @GetMapping()
     public @ResponseBody ResponseEntity<ResponseDto> getInstructores(@RequestHeader("page-number") Integer page,
-            @RequestHeader("page-size") Integer size) {
+            @RequestHeader("page-size") Integer size) { 
         PageDto<InstructorDto> response = instructorService.getPageDtoInstructores(page, size);
+        System.out.println(response);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
-    }
+    } 
 
     @GetMapping("/{documento}")
     public @ResponseBody ResponseEntity<ResponseDto> getFormatoById(@PathVariable("documento") String documento) {

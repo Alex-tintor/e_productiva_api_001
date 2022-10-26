@@ -16,7 +16,7 @@ import lombok.Data;
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
-public class Usuario {
+public class Usuario extends GeneralEntity{
 
     @Id
     @Column(length = 36)

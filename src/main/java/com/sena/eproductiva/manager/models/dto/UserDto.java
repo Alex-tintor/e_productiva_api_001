@@ -7,20 +7,18 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class AprendizDto implements Serializable {
-
+public class UserDto implements Serializable {
+    
+    @NotBlank
+    @NotEmpty
+    @NotNull
+    private String uuid;
     @NotBlank
     @NotEmpty
     @NotNull
     private String documento;
-    @NotBlank
-    @NotEmpty
-    @NotNull
-    private String documentoType;
     @NotBlank
     @NotEmpty
     @NotNull
@@ -40,11 +38,10 @@ public class AprendizDto implements Serializable {
     @NotBlank
     @NotEmpty
     @NotNull
-    private String fichaId;
+    private boolean enabled;
     @NotBlank
     @NotEmpty
     @NotNull
-    private String etapa;
-    @NotNull
-    private boolean enabled;
+    private String documentoType;
+    
 }

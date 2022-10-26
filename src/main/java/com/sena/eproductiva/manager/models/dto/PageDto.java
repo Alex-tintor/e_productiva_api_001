@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import com.sena.eproductiva.manager.models.entitys.Instructor;
+import com.sena.eproductiva.manager.models.entitys.GeneralEntity;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class PageDto<T> extends ResponseDto {
     private Integer numberOfElements;
     private Sort sort;
 
-    public PageDto(Page<Instructor> page) {
+    public PageDto(Page<GeneralEntity> page) {
         this.setPageable(page.getPageable());
         this.setLast(page.isLast());
         this.setFirst(page.isFirst());

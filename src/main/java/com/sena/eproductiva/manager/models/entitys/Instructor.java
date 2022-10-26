@@ -19,5 +19,5 @@ public class Instructor extends Usuario {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_INSTRUCTOR_CENTRO"))
     private Centro centro;
-
+    
 }

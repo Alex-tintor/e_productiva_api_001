@@ -10,19 +10,17 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper=false)
-public class CentroFormacionDto implements Serializable {
-
+@EqualsAndHashCode(callSuper = false)
+public class ProgramaDto implements Serializable{
+    
+    @NotNull
     @NotBlank
     @NotEmpty
+    private Long id;
     @NotNull
-    private long uuid;
     @NotBlank
     @NotEmpty
-    @NotNull
     private String nombre;
-    @NotBlank
-    @NotEmpty
     @NotNull
     private boolean enabled;
 }

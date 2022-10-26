@@ -78,7 +78,7 @@ public class InstructorService {
 
     public PageDto<InstructorDto> getPageDtoInstructores(int page, int size) {
         Page<Instructor> instructores = getPageInstructores(PageRequest.of(page, size));
-        PageDto<InstructorDto> pageDto = new PageDto<>(instructores);
+        PageDto<InstructorDto> pageDto = new PageDto<>();
         pageDto.setContent(this.transformListDto(instructores.getContent()));
         return pageDto;
     }

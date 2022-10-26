@@ -7,19 +7,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-
+@Data
 @Entity
-@Table(name = "programas_de_formacion")
-public class Programa {
+@Table(name = "programas")
+public class Programa extends GeneralEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(length = 75, nullable = false)
     private String nombre;
