@@ -23,6 +23,7 @@ import com.sena.eproductiva.manager.models.enums.ResponseType;
 import com.sena.eproductiva.manager.services.FormatoService;
 import com.sena.eproductiva.manager.services.MessageService;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/seguimientos")
 public class FormatoController {
     

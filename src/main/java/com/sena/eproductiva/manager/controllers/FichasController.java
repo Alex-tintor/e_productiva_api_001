@@ -45,7 +45,7 @@ public class FichasController {
     MessageService messageService;
 
     @GetMapping
-    public @ResponseBody ResponseEntity<ResponseDto> getFichas(@RequestHeader("page-number") Integer page, @RequestParam("page-size") Integer size){
+    public @ResponseBody ResponseEntity<ResponseDto> getFichas(@RequestHeader("page-number") Integer page, @RequestHeader("page-size") Integer size){
         PageDto<FichaDto> response = fichasService.getFichasDtoPage(page,size);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }

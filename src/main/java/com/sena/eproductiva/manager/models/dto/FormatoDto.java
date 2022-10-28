@@ -1,7 +1,7 @@
 package com.sena.eproductiva.manager.models.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.Data;
 
