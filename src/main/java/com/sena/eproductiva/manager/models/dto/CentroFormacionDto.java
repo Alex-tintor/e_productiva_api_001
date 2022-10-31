@@ -13,16 +13,14 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 public class CentroFormacionDto implements Serializable {
 
-    @NotBlank
-    @NotEmpty
+    // @NotBlank
+    // @NotEmpty
     @NotNull
     private long uuid;
     @NotBlank
     @NotEmpty
     @NotNull
     private String nombre;
-    @NotBlank
-    @NotEmpty
     @NotNull
     private boolean enabled;
 }

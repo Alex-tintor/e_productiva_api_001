@@ -51,34 +51,50 @@ public class FormatoController {
     }
 
     @GetMapping("/{documento}")
-    public @ResponseBody ResponseEntity<ResponseDto> getFormatoById(@PathVariable("documento") Long documento){
+    public @ResponseBody ResponseEntity<?> getFormatoById(@PathVariable("documento") Long documento){
         Formato formato = formatoService.getFormatoById(documento);
         if(Objects.isNull(formato))
             return new ResponseEntity<>(new ActionDto("El Formato con el documento:" + documento + "no existe"),
                 HttpStatus.BAD_REQUEST);
         FormatoDto response = formatoService.transformDto(formato);
         System.out.println(response);
-        // TODO return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
-        return new ResponseEntity<>(new ActionDto("el trabajo del programador si ha servido :D"), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+        // return new ResponseEntity<>(new ActionDto("el trabajo del programador si ha servido :D"), HttpStatus.ACCEPTED);
     }
 
     @PostMapping()
-    public @ResponseBody ResponseEntity<ResponseDto> createFormato(
+    public @ResponseBody ResponseEntity<?> createFormato(
             @Valid @ModelAttribute FormatoDto formatoDto, BindingResult validationResult,
             HttpServletRequest request) {
         if (validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
         if (formatoService.validateExist(formatoDto)) {
-            String[] error = { "Formato con documentos enviados ya existe" };
+            String[] error = { "El Formato ya existe" };
             return new ResponseEntity<>(
                     new InvalidDto(ResponseType.ENTITY_EXIST, Arrays.asList(error), request.getRequestURI()),
                     HttpStatus.BAD_REQUEST);
         }
         Formato Formato = formatoService.createFormato(formatoDto);
-        // TODO return new ResponseEntity<>(formatoService.transformDto(Formato),HttpStatus.CREATED);
-        System.out.println(Formato);
-        return new ResponseEntity<>(new ActionDto("todo chido mi rey"), HttpStatus.CREATED);
+        return new ResponseEntity<>(formatoService.transformDto(Formato),HttpStatus.CREATED);
+        // System.out.println(Formato);
+        // return new ResponseEntity<>(new ActionDto("todo chido mi rey"), HttpStatus.CREATED);
     }
+
+    // @PostMapping()
+    // public @ResponseBody ResponseEntity<?> createCentro(
+    //         @Valid @ModelAttribute CentroFormacionDto centroFormacionDto, BindingResult validationResult,
+    //         HttpServletRequest request){
+    //     if(validationResult.hasErrors())
+    //         return messageService.invalidFields(validationResult, request.getRequestURI());
+    //     if(centroFormacionService.validateExist(centroFormacionDto)){
+    //         String[] error = {"El centro ya existe"};
+    //         return new ResponseEntity<>(
+    //             new InvalidDto(ResponseType.ENTITY_EXIST, Arrays.asList(error), request.getRequestURI()),
+    //             HttpStatus.BAD_REQUEST);
+    //     }
+    //     Centro centro = centroFormacionService.createCentro(centroFormacionDto);
+    //     return new ResponseEntity<>(centroFormacionService.transformDto(centro), HttpStatus.ACCEPTED);
+    // }
 
     @PutMapping("/{documento}")
     public @ResponseBody ResponseEntity<ResponseDto> updateFormato(@PathVariable("documento") Long documento,

@@ -40,7 +40,7 @@ public class AprendizDto implements Serializable {
     @NotBlank
     @NotEmpty
     @NotNull
-    private String fichaId;
+    private Long fichaId;
     @NotBlank
     @NotEmpty
     @NotNull

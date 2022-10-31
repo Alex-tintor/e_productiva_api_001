@@ -12,6 +12,6 @@ import com.sena.eproductiva.manager.models.entitys.Ficha;
 @Repository
  public interface FichasRepository extends JpaRepository<Ficha, Long>, JpaSpecificationExecutor<Ficha> {
 
-     @Query(value = "select f from Ficha f where f.id = : id ")
-     public Optional<Ficha> findFichaByAnyId(@Param("id")String id);
+     @Query(value = "select f from Ficha f where f.id = :id ")
+     public Optional<Ficha> findFichaByAnyId(@Param("id")Long id);
 }

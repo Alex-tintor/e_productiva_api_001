@@ -24,11 +24,11 @@ public class CentroFormacionService {
         return centroFormacionRepository.findAll();
     }
 
-    public Centro getCentroFormacionById(long id) {
-        return centroFormacionRepository.findById(id).orElse(null);
+    public Centro getCentroFormacionById(String id) {
+        return centroFormacionRepository.findByName(id).orElse(null);
     }
 
-    public Centro updateCentro(CentroFormacionDto centroFormacionDto,Long id) {
+    public Centro updateCentro(CentroFormacionDto centroFormacionDto,String id) {
         Centro centro = this.getCentroFormacionById(id);
         if(Objects.isNull(centro))
             centro = new Centro();
@@ -65,11 +65,11 @@ public class CentroFormacionService {
     }
 
     public boolean validateExist(CentroFormacionDto centro){
-        return Objects.nonNull(centro.getNombre())||
-            Objects.nonNull(centro.getUuid());
+        return Objects.isNull(centro.getNombre())||
+            Objects.isNull(centro.getUuid());
     }
 
-    public void disableCentro(Long id){
+    public void disableCentro(String id){
         Centro centro = this.getCentroFormacionById(id);
         centro.setEnabled(false);
         centroFormacionRepository.save(centro);

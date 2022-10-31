@@ -75,7 +75,7 @@ public class FormatoService {
     }
 
     public boolean validateExist(FormatoDto formatoDto){
-        return Objects.nonNull(formatoDto.getId());
+        return Objects.isNull(formatoDto.getId());
     }
 
 }

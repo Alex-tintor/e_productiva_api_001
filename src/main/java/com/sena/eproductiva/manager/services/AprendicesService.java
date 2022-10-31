@@ -62,7 +62,7 @@ public class AprendicesService {
             dto.setApellido(aprendiz.getApellido());
             dto.setEmail(aprendiz.getEmail());
             dto.setTelefono(aprendiz.getTelefono());
-            dto.setFichaId(aprendiz.getFicha().getId().toString());
+            dto.setFichaId(aprendiz.getFicha().getId());
             dto.setEtapa(aprendiz.getEtapa().toString());
             dto.setEnabled(aprendiz.isEnabled());
             return dto;

@@ -34,18 +34,18 @@ public class FichasService {
         return fichasRepository.findAll();
     }
 
-    public Ficha getFichaById(String id) {
+    public Ficha getFichaById(Long id) {
         return fichasRepository.findFichaByAnyId(id).orElse(null);
     }
 
-    public Ficha updateFicha(FichaDto fichaDto,String id) {
+    public Ficha updateFicha(FichaDto fichaDto,Long id) {
         Ficha ficha = getFichaById(id);
         if(Objects.isNull(ficha))
             ficha = new Ficha();
         ficha.setId(fichaDto.getId());
         ficha.setProgramaFormacionEntity(programasFormacionService.getProgramasFormacionByName(fichaDto.getProgramaId()));
-        ficha.setCentroFormacionEntity(centroFormacionService.getCentroFormacionById(fichaDto.getCentroId()));
-        ficha.setInstructorEntity(instructorService.getInstructorByDocumento(ficha.getInstructorEntity().getDocumento()));
+        ficha.setCentroFormacionEntity(centroFormacionService.getCentroFormacionById(fichaDto.getCentroId().toString()));
+        ficha.setInstructorEntity(instructorService.getInstructorByDocumento(fichaDto.getInstructor()));
         ficha.setModalidad(fichaDto.getModalidad());
         ficha.setInicio(fichaDto.getInicio());
         ficha.setFin(fichaDto.getFin());
@@ -92,8 +92,8 @@ public class FichasService {
             Objects.isNull(fichaDto.getInstructor());
     }
 
-    public void disabledFicha(String id) {
-        Ficha ficha = this.getFichaById(null);
+    public void disabledFicha(Long id) {
+        Ficha ficha = this.getFichaById(id);
         ficha.setEnabled(false);
         fichasRepository.save(ficha);
     }

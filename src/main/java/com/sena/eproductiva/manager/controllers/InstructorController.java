@@ -68,7 +68,7 @@ public class InstructorController {
         if (validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
         if (instructorService.validarExistencia(instructorDto)) {
-            String[] error = { "Entidad con documentos enviados ya existe" };
+            String[] error = { "Instructor con documentos enviados ya existe" };
             return new ResponseEntity<>(
                     new InvalidDto(ResponseType.ENTITY_EXIST, Arrays.asList(error), request.getRequestURI()),
                     HttpStatus.BAD_REQUEST);

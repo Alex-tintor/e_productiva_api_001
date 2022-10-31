@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.sena.eproductiva.manager.models.entitys.Programa;
 
 @Repository
-public interface ProgramasFormacionRepository extends JpaRepository<Programa, String>, JpaSpecificationExecutor<Programa> {
+public interface ProgramasFormacionRepository extends JpaRepository<Programa, Long>, JpaSpecificationExecutor<Programa> {
         
         @Query(value = "select p from Programa p where p.nombre = :id")
         public Optional<Programa> findByNombre(@Param("id") String nombre);

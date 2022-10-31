@@ -51,17 +51,17 @@ public class FichasController {
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> getFichaById(@PathVariable("id") String id){
+    public @ResponseBody ResponseEntity<?> getFichaById(@PathVariable("id") Long id){
         Ficha ficha = fichasService.getFichaById(id);
         if(Objects.isNull(ficha))
-            return new ResponseEntity<>(new ActionDto("el centro de formacion:"+id+"no existe"),HttpStatus.BAD_REQUEST);
-        // TODO FichaDto response = fichasService.transfomrDto(ficha);
-        // TODO return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(new ActionDto("La Ficha de formacion:"+id+"no existe"),HttpStatus.BAD_REQUEST);
+        FichaDto response = fichasService.transfomrDto(ficha);
+        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+        // return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @PostMapping()
-    public @ResponseBody ResponseEntity<ResponseDto> createFicha(
+    public @ResponseBody ResponseEntity<?> createFicha(
             @Valid @ModelAttribute FichaDto FichaDto, BindingResult validationResult,
             HttpServletRequest request) {
         if (validationResult.hasErrors())
@@ -72,26 +72,27 @@ public class FichasController {
                     new InvalidDto(ResponseType.ENTITY_EXIST, Arrays.asList(error), request.getRequestURI()),
                     HttpStatus.BAD_REQUEST);
         }
-        // TODO Ficha ficha = fichasService.createFicha(FichaDto);
-        // TODO return new ResponseEntity<>(fichasService.transfomrDto(ficha), HttpStatus.CREATED);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        Ficha ficha = fichasService.createFicha(FichaDto);
+        return new ResponseEntity<>(fichasService.transfomrDto(ficha), HttpStatus.CREATED);
+        // return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> updateCentro(@Valid @PathVariable("id") String id, @ModelAttribute FichaDto fichaDto, BindingResult validationResult,
+    public @ResponseBody ResponseEntity<?> updateFicha(@Valid @PathVariable("id") Long id, @ModelAttribute FichaDto fichaDto, BindingResult validationResult,
             HttpServletRequest request){
         if(validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
         if(Objects.isNull(fichasService.getFichaById(id))){
-            return new ResponseEntity<>(new ActionDto("el Centro:"+id+"no existe"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ActionDto("La Ficha:"+id+"no existe"),HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        Ficha ficha = fichasService.createFicha(fichaDto);
+        return new ResponseEntity<>(fichasService.transfomrDto(ficha) ,HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> unabledCentro(@PathVariable("id") String id){
+    public @ResponseBody ResponseEntity<ResponseDto> unabledFicha(@PathVariable("id") Long id){
         if(Objects.isNull(fichasService.getFichaById(id)))
-            return new ResponseEntity<>(new ActionDto("el Centro:"+id+"no existe"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ActionDto("La Ficha:"+id+"no existe"),HttpStatus.BAD_REQUEST);
         fichasService.disabledFicha(id);
         return new ResponseEntity<>(new ActionDto("viernes 21 de octubre y son las 11:22 de la noche :D"),HttpStatus.ACCEPTED);
     }

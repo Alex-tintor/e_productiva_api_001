@@ -1,4 +1,4 @@
-// TODO centros de formacion bug
+// TODO centros de formacion bug put
 package com.sena.eproductiva.manager.controllers;
 
 import java.util.Arrays;
@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,8 +34,8 @@ import com.sena.eproductiva.manager.models.enums.ResponseType;
 import com.sena.eproductiva.manager.services.CentroFormacionService;
 import com.sena.eproductiva.manager.services.MessageService;
 
-@CrossOrigin("*")
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/centros")
 public class CentroFormacionController {
     
@@ -53,44 +53,60 @@ public class CentroFormacionController {
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> getCentroById(@PathParam("id") long id){
+    public @ResponseBody ResponseEntity<?> getCentroById(@PathVariable("id") String id){
         Centro centro = centroFormacionService.getCentroFormacionById(id);
         if(Objects.isNull(centro))
-            return new ResponseEntity<>(new ActionDto("El centro con Id:"+id+"no existe"),
+            return new ResponseEntity<>(new ActionDto("El centro con nombre/id:"+id+"no existe"),
                 HttpStatus.BAD_REQUEST);
-        // TODO CentroFormacionDto response = centroFormacionService.transformDto(centro);
-        // TODO return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        CentroFormacionDto response = centroFormacionService.transformDto(centro);
+        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+        
     }
 
-    @PostMapping
-    public @ResponseBody ResponseEntity<ResponseDto> createCentro(@Valid @ModelAttribute CentroFormacionDto centroFormacionDto, BindingResult validationResult,
+    @PostMapping()
+    public @ResponseBody ResponseEntity<?> createCentro(
+            @Valid @ModelAttribute CentroFormacionDto centroFormacionDto, BindingResult validationResult,
             HttpServletRequest request){
         if(validationResult.hasErrors())
-            return messageService.invalidFields(validationResult,request.getRequestURI());
+            return messageService.invalidFields(validationResult, request.getRequestURI());
         if(centroFormacionService.validateExist(centroFormacionDto)){
             String[] error = {"El centro ya existe"};
             return new ResponseEntity<>(
                 new InvalidDto(ResponseType.ENTITY_EXIST, Arrays.asList(error), request.getRequestURI()),
-                HttpStatus.BAD_REQUEST
-            );
+                HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        Centro centro = centroFormacionService.createCentro(centroFormacionDto);
+        return new ResponseEntity<>(centroFormacionService.transformDto(centro), HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> updateCentro(@Valid @PathVariable("id") Long id, @ModelAttribute CentroFormacionDto centroFormacionDto, BindingResult validationResult,
-            HttpServletRequest request){
+    public @ResponseBody ResponseEntity<?> updateCentro(
+            @PathVariable("id") String id,@Valid @RequestBody CentroFormacionDto centroFormacionDto,
+            BindingResult validationResult, HttpServletRequest request){
         if(validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
         if(Objects.isNull(centroFormacionService.getCentroFormacionById(id))){
             return new ResponseEntity<>(new ActionDto("el Centro:"+id+"no existe"),HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        Centro centro = centroFormacionService.updateCentro(centroFormacionDto, id);
+        return new ResponseEntity<>(centro,HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping("/{}")
-    public @ResponseBody ResponseEntity<ResponseDto> unabledCentro(@PathVariable("id") Long id){
+    // @PutMapping("/{documento}")
+    // public @ResponseBody ResponseEntity<ResponseDto> updateInstructor(@PathVariable("documento") String documento,
+    //         @Valid @ModelAttribute InstructorDto instructorDto, BindingResult validationResult,
+    //         HttpServletRequest request) {
+    //     if (validationResult.hasErrors())
+    //         return messageService.invalidFields(validationResult, request.getRequestURI());
+    //     if (Objects.isNull(instructorService.getInstructorByDocumento(documento)))
+    //         return new ResponseEntity<>(new ActionDto("Instructor con el documento: " + documento + " no existe"),
+    //                 HttpStatus.BAD_REQUEST);
+    //     Instructor instructor = instructorService.updateInstructor(instructorDto, documento);
+    //     return new ResponseEntity<>(instructorService.transformDto(instructor), HttpStatus.ACCEPTED);
+    // }
+
+    @DeleteMapping("/{id}")
+    public @ResponseBody ResponseEntity<ResponseDto> unabledCentro(@PathVariable("id") String id){
         if(Objects.isNull(centroFormacionService.getCentroFormacionById(id)))
             return new ResponseEntity<>(new ActionDto("el Centro:"+id+"no existe"),HttpStatus.BAD_REQUEST);
         centroFormacionService.disableCentro(id);
