@@ -1,4 +1,3 @@
-// TODO centros de formacion bug put
 package com.sena.eproductiva.manager.controllers;
 
 import java.util.Arrays;
@@ -48,12 +47,11 @@ public class CentroFormacionController {
     @GetMapping()
     public @ResponseBody ResponseEntity<ResponseDto> getCentros(@RequestHeader("page-number") Integer page ,@RequestHeader("page-size") Integer size){
         PageDto<CentroFormacionDto> response = centroFormacionService.getPageDtoCentro(page,size);
-        System.out.println(response);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody ResponseEntity<?> getCentroById(@PathVariable("id") String id){
+    public @ResponseBody ResponseEntity<ResponseDto> getCentroById(@PathVariable("id") String id){
         Centro centro = centroFormacionService.getCentroFormacionById(id);
         if(Objects.isNull(centro))
             return new ResponseEntity<>(new ActionDto("El centro con nombre/id:"+id+"no existe"),
@@ -64,7 +62,7 @@ public class CentroFormacionController {
     }
 
     @PostMapping()
-    public @ResponseBody ResponseEntity<?> createCentro(
+    public @ResponseBody ResponseEntity<ResponseDto> createCentro(
             @Valid @ModelAttribute CentroFormacionDto centroFormacionDto, BindingResult validationResult,
             HttpServletRequest request){
         if(validationResult.hasErrors())
@@ -89,6 +87,7 @@ public class CentroFormacionController {
             return new ResponseEntity<>(new ActionDto("el Centro:"+id+"no existe"),HttpStatus.BAD_REQUEST);
         }
         Centro centro = centroFormacionService.updateCentro(centroFormacionDto, id);
+        //TODO falta centrodto
         return new ResponseEntity<>(centro,HttpStatus.ACCEPTED);
     }
 

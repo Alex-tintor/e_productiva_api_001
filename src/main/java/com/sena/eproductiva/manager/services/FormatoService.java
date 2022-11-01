@@ -2,7 +2,6 @@ package com.sena.eproductiva.manager.services;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,9 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.sena.eproductiva.manager.models.dto.FormatoDto;
 import com.sena.eproductiva.manager.models.dto.PageDto;
-import com.sena.eproductiva.manager.models.dto.UserDto;
 import com.sena.eproductiva.manager.models.entitys.Formato;
-import com.sena.eproductiva.manager.models.entitys.Usuario;
 import com.sena.eproductiva.manager.repositories.FormatoRepository;
 
 
@@ -33,7 +30,6 @@ public class FormatoService {
     } 
 
     public Formato getFormatoById(Long id){
-        // return  formatoRepository.findByInstructor(id).orElse(null);
         return formatoRepository.findById(id).orElse(null);
     }
 

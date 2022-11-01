@@ -1,7 +1,5 @@
 package com.sena.eproductiva.manager.models.dto;
 
-import java.io.Serializable;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -11,10 +9,8 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class CentroFormacionDto implements Serializable {
+public class CentroFormacionDto extends ResponseDto {
 
-    // @NotBlank
-    // @NotEmpty
     @NotNull
     private long uuid;
     @NotBlank

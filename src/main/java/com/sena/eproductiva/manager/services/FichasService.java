@@ -2,7 +2,6 @@ package com.sena.eproductiva.manager.services;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -85,6 +84,7 @@ public class FichasService {
         return pageDto ;
     }
 
+    //TODO pensar como remover el mensaje de sonar 
     public boolean validateExist(FichaDto fichaDto){
         return Objects.isNull(fichaDto.getId())||
             Objects.isNull(fichaDto.getCentroId())||

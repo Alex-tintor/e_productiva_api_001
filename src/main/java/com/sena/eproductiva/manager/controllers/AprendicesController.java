@@ -48,7 +48,6 @@ public class AprendicesController {
     public @ResponseBody ResponseEntity<ResponseDto> getAprendices(@RequestHeader("page-number") Integer page,
             @RequestHeader("page-size") Integer size){ 
         PageDto<AprendizDto> response = aprendicesService.getPageDtoAprendices(page, size);
-        System.out.println(response);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
 
@@ -59,10 +58,7 @@ public class AprendicesController {
             return new ResponseEntity<>(new ActionDto("El aprendiz con el documento:" + documento + "no existe"),
                 HttpStatus.BAD_REQUEST);
         AprendizDto response = aprendicesService.transformDto(aprendiz);
-        //TODO usar log y no println
-        System.out.println(response);
-        // TODO return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
-        return new ResponseEntity<>(new ActionDto("el trabajo del programador si ha servido :D"), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     @PostMapping()
@@ -78,9 +74,7 @@ public class AprendicesController {
                     HttpStatus.BAD_REQUEST);
         }
         Aprendiz aprendiz = aprendicesService.createAprendiz(aprendizDto);
-        // TODO return new ResponseEntity<>(aprendicesService.transformDto(aprendiz),HttpStatus.CREATED);
-        System.out.println(aprendiz);
-        return new ResponseEntity<>(new ActionDto("todo chido mi rey"), HttpStatus.CREATED);
+        return new ResponseEntity<>(aprendicesService.transformDto(aprendiz),HttpStatus.CREATED);
     }
 
     @PutMapping("/{documento}")
@@ -92,9 +86,9 @@ public class AprendicesController {
         if(Objects.isNull(aprendicesService.getAprendicesByDocument(documento)))
             return new ResponseEntity<>(new ActionDto("Aprendiz con el Documento:"+documento+"no existe"),
                 HttpStatus.BAD_REQUEST);
-        // TODO Aprendiz aprendiz = aprendicesService.updateAprendiz(aprendizDto, documento);
-        // TODO return new ResponseEntity<>(aprendicesService.transformDto(aprendiz),HttpStatus.ACCEPTED);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        Aprendiz aprendiz = aprendicesService.updateAprendiz(aprendizDto, documento);
+        AprendizDto response = aprendicesService.transformDto(aprendiz);
+        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{documento}")

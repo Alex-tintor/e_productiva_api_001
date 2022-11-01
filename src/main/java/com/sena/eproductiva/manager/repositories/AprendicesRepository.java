@@ -13,5 +13,5 @@ import com.sena.eproductiva.manager.models.entitys.Aprendiz;
 public interface AprendicesRepository extends JpaRepository<Aprendiz, String>, JpaSpecificationExecutor<Aprendiz> {
 
         @Query(value = "select a from Aprendiz a where a.documento = :documento or a.telefono = :documento or a.email = :documento")
-        public Optional<Aprendiz> findByDocumento( @Param("documento") String documento);
+        public Optional<Aprendiz> findByDocumento(@Param("documento") String documento);
 }

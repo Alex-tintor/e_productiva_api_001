@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,34 +50,32 @@ public class FichasController {
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody ResponseEntity<?> getFichaById(@PathVariable("id") Long id){
+    public @ResponseBody ResponseEntity<ResponseDto> getFichaById(@PathVariable("id") Long id){
         Ficha ficha = fichasService.getFichaById(id);
         if(Objects.isNull(ficha))
             return new ResponseEntity<>(new ActionDto("La Ficha de formacion:"+id+"no existe"),HttpStatus.BAD_REQUEST);
         FichaDto response = fichasService.transfomrDto(ficha);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
-        // return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @PostMapping()
-    public @ResponseBody ResponseEntity<?> createFicha(
-            @Valid @ModelAttribute FichaDto FichaDto, BindingResult validationResult,
+    public @ResponseBody ResponseEntity<ResponseDto> createFicha(
+            @Valid @ModelAttribute FichaDto fichaDto, BindingResult validationResult,
             HttpServletRequest request) {
         if (validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
-        if (fichasService.validateExist(FichaDto)) {
+        if (fichasService.validateExist(fichaDto)) {
             String[] error = { "Entidad con documentos enviados ya existe" };
             return new ResponseEntity<>(
                     new InvalidDto(ResponseType.ENTITY_EXIST, Arrays.asList(error), request.getRequestURI()),
                     HttpStatus.BAD_REQUEST);
         }
-        Ficha ficha = fichasService.createFicha(FichaDto);
+        Ficha ficha = fichasService.createFicha(fichaDto);
         return new ResponseEntity<>(fichasService.transfomrDto(ficha), HttpStatus.CREATED);
-        // return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public @ResponseBody ResponseEntity<?> updateFicha(@Valid @PathVariable("id") Long id, @ModelAttribute FichaDto fichaDto, BindingResult validationResult,
+    public @ResponseBody ResponseEntity<ResponseDto> updateFicha(@Valid @PathVariable("id") Long id, @ModelAttribute FichaDto fichaDto, BindingResult validationResult,
             HttpServletRequest request){
         if(validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
