@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ProgramaDto implements Serializable{
+public class ProgramaDto extends ResponseDto{
     
     @NotNull
     @NotBlank

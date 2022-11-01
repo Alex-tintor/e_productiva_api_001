@@ -7,9 +7,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class UserDto implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+public class UserDto extends ResponseDto {
     
     @NotBlank
     @NotEmpty

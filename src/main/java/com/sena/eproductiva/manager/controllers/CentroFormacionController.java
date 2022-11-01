@@ -63,7 +63,7 @@ public class CentroFormacionController {
 
     @PostMapping()
     public @ResponseBody ResponseEntity<ResponseDto> createCentro(
-            @Valid @ModelAttribute CentroFormacionDto centroFormacionDto, BindingResult validationResult,
+            @Valid @RequestBody CentroFormacionDto centroFormacionDto, BindingResult validationResult,
             HttpServletRequest request){
         if(validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
@@ -78,7 +78,7 @@ public class CentroFormacionController {
     }
 
     @PutMapping("/{id}")
-    public @ResponseBody ResponseEntity<?> updateCentro(
+    public @ResponseBody ResponseEntity<ResponseDto> updateCentro(
             @PathVariable("id") String id,@Valid @RequestBody CentroFormacionDto centroFormacionDto,
             BindingResult validationResult, HttpServletRequest request){
         if(validationResult.hasErrors())
@@ -86,23 +86,10 @@ public class CentroFormacionController {
         if(Objects.isNull(centroFormacionService.getCentroFormacionById(id))){
             return new ResponseEntity<>(new ActionDto("el Centro:"+id+"no existe"),HttpStatus.BAD_REQUEST);
         }
-        Centro centro = centroFormacionService.updateCentro(centroFormacionDto, id);
-        //TODO falta centrodto
-        return new ResponseEntity<>(centro,HttpStatus.ACCEPTED);
+        Centro centro = centroFormacionService.updateCentro(centroFormacionDto,id);
+        CentroFormacionDto response = centroFormacionService.transformDto(centro);
+        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
-
-    // @PutMapping("/{documento}")
-    // public @ResponseBody ResponseEntity<ResponseDto> updateInstructor(@PathVariable("documento") String documento,
-    //         @Valid @ModelAttribute InstructorDto instructorDto, BindingResult validationResult,
-    //         HttpServletRequest request) {
-    //     if (validationResult.hasErrors())
-    //         return messageService.invalidFields(validationResult, request.getRequestURI());
-    //     if (Objects.isNull(instructorService.getInstructorByDocumento(documento)))
-    //         return new ResponseEntity<>(new ActionDto("Instructor con el documento: " + documento + " no existe"),
-    //                 HttpStatus.BAD_REQUEST);
-    //     Instructor instructor = instructorService.updateInstructor(instructorDto, documento);
-    //     return new ResponseEntity<>(instructorService.transformDto(instructor), HttpStatus.ACCEPTED);
-    // }
 
     @DeleteMapping("/{id}")
     public @ResponseBody ResponseEntity<ResponseDto> unabledCentro(@PathVariable("id") String id){

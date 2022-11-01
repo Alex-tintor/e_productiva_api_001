@@ -58,9 +58,7 @@ public class ProgramasFormacionController {
             return new ResponseEntity<>(new ActionDto("El programa con el documento:" + nombre + "no existe"),
                 HttpStatus.BAD_REQUEST);
         ProgramaDto response = programasFormacionService.transformDto(programa);
-        System.out.println(response);
-        // TODO return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
-        return new ResponseEntity<>(new ActionDto("el trabajo del programador si ha servido :D"), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     @PostMapping()
@@ -76,9 +74,8 @@ public class ProgramasFormacionController {
                     HttpStatus.BAD_REQUEST);
         }
         Programa programa = programasFormacionService.createPrograma(programaDto);
-        // TODO return new ResponseEntity<>(programasFormacionService.transformDto(aprendiz),HttpStatus.CREATED);
-        System.out.println(programa);
-        return new ResponseEntity<>(new ActionDto("todo chido mi rey"), HttpStatus.CREATED);
+        return new ResponseEntity<>(programasFormacionService.transformDto(programa),HttpStatus.CREATED);
+        
     }
 
     @PutMapping("/{documento}")
@@ -90,9 +87,8 @@ public class ProgramasFormacionController {
         if(Objects.isNull(programasFormacionService.getProgramasFormacionByName(documento)))
             return new ResponseEntity<>(new ActionDto("Aprendiz con el Documento:"+documento+"no existe"),
                 HttpStatus.BAD_REQUEST);
-        // TODO Aprendiz aprendiz = programasFormacionService.updateAprendiz(ProgramaDto, documento);
-        // TODO return new ResponseEntity<>(programasFormacionService.transformDto(aprendiz),HttpStatus.ACCEPTED);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        Programa programa = programasFormacionService.updatePrograma(programaDto, documento);
+        return new ResponseEntity<>(programasFormacionService.transformDto(programa),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{documento}")

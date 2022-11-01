@@ -8,9 +8,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class FormatoDto implements Serializable{
+@EqualsAndHashCode(callSuper = false)
+public class FormatoDto extends ResponseDto{
 
     @NotNull
     private long id;
