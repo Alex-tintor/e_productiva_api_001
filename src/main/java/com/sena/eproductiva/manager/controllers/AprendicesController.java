@@ -59,6 +59,7 @@ public class AprendicesController {
             return new ResponseEntity<>(new ActionDto("El aprendiz con el documento:" + documento + "no existe"),
                 HttpStatus.BAD_REQUEST);
         AprendizDto response = aprendicesService.transformDto(aprendiz);
+        //TODO usar log y no println
         System.out.println(response);
         // TODO return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
         return new ResponseEntity<>(new ActionDto("el trabajo del programador si ha servido :D"), HttpStatus.ACCEPTED);

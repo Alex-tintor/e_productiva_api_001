@@ -18,8 +18,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "fichas")
-public class Ficha extends GeneralEntity {
-
+public class Ficha implements GeneralEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

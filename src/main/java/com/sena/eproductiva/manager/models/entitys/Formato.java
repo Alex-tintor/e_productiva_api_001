@@ -16,7 +16,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "formato")
-public class Formato extends GeneralEntity{
+public class Formato implements GeneralEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
