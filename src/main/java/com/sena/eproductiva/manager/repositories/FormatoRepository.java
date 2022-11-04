@@ -12,6 +12,6 @@ import com.sena.eproductiva.manager.models.entitys.Formato;
 @Repository
 public interface FormatoRepository extends JpaRepository<Formato, Long>, JpaSpecificationExecutor<Formato> {
 
-    @Query(value = "select f from Formato f where f.instructor.documento = :documento")
+    @Query(value = "select f from Formato f where f.instructor.documento = :documento or f.id = :documento")
     public Optional<Formato> findByInstructorDocument(@Param("documento") String documento);
 }

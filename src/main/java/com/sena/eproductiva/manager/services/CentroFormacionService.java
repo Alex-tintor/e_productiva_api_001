@@ -32,6 +32,7 @@ public class CentroFormacionService {
         Centro centro = this.getCentroFormacionById(id);
         if(Objects.isNull(centro))
             centro = new Centro();
+        centro.setUuid(centroFormacionDto.getUuid());
         centro.setNombre(centroFormacionDto.getNombre());
         centro.setEnabled(centroFormacionDto.isEnabled());
         return centroFormacionRepository.save(centro);

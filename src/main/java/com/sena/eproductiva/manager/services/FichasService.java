@@ -33,11 +33,11 @@ public class FichasService {
         return fichasRepository.findAll();
     }
 
-    public Ficha getFichaById(Long id) {
+    public Ficha getFichaById(String id) {
         return fichasRepository.findFichaByAnyId(id).orElse(null);
     }
 
-    public Ficha updateFicha(FichaDto fichaDto,Long id) {
+    public Ficha updateFicha(FichaDto fichaDto,String id) {
         Ficha ficha = getFichaById(id);
         if(Objects.isNull(ficha))
             ficha = new Ficha();
@@ -59,7 +59,7 @@ public class FichasService {
     public FichaDto transfomrDto(Ficha ficha){
         FichaDto dto = new FichaDto();
         dto.setId(ficha.getId());
-        dto.setProgramaId(ficha.getProgramaFormacionEntity().getId().toString());
+        dto.setProgramaId(ficha.getProgramaFormacionEntity().getId());
         dto.setCentroId(ficha.getCentroFormacionEntity().getUuid());
         dto.setInstructor(ficha.getInstructorEntity().getDocumento());
         dto.setModalidad(ficha.getModalidad());
@@ -92,7 +92,7 @@ public class FichasService {
             Objects.isNull(fichaDto.getInstructor());
     }
 
-    public void disabledFicha(Long id) {
+    public void disabledFicha(String id) {
         Ficha ficha = this.getFichaById(id);
         ficha.setEnabled(false);
         fichasRepository.save(ficha);

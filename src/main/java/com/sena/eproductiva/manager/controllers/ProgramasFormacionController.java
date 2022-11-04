@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,6 +35,7 @@ import com.sena.eproductiva.manager.services.ProgramasFormacionService;
 
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/programas")
 public class ProgramasFormacionController {
     
@@ -44,7 +46,7 @@ public class ProgramasFormacionController {
     private MessageService messageService;
 
     @GetMapping
-    public @ResponseBody ResponseEntity<ResponseDto> getAprendices(@RequestHeader("page-number") Integer page,
+    public @ResponseBody ResponseEntity<ResponseDto> getProgramas(@RequestHeader("page-number") Integer page,
             @RequestHeader("page-size") Integer size){ 
         PageDto<ProgramaDto> response = programasFormacionService.getPageDtoProgramas(page, size);
         System.out.println(response);
@@ -52,17 +54,17 @@ public class ProgramasFormacionController {
     }
 
     @GetMapping("/{documento}")
-    public @ResponseBody ResponseEntity<ResponseDto> getAprendicesByDocument(@PathVariable("documento") String nombre){
+    public @ResponseBody ResponseEntity<ResponseDto> getProgramasByName(@PathVariable("documento") String nombre){
         Programa programa = programasFormacionService.getProgramasFormacionByName(nombre);
         if(Objects.isNull(programa))
-            return new ResponseEntity<>(new ActionDto("El programa con el documento:" + nombre + "no existe"),
+            return new ResponseEntity<>(new ActionDto("Programa: " + nombre + " no existe"),
                 HttpStatus.BAD_REQUEST);
         ProgramaDto response = programasFormacionService.transformDto(programa);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     @PostMapping()
-    public @ResponseBody ResponseEntity<ResponseDto> createAprendiz(
+    public @ResponseBody ResponseEntity<ResponseDto> createPrograma(
             @Valid @ModelAttribute ProgramaDto programaDto, BindingResult validationResult,
             HttpServletRequest request) {
         if (validationResult.hasErrors())
@@ -79,28 +81,27 @@ public class ProgramasFormacionController {
     }
 
     @PutMapping("/{documento}")
-    public @ResponseBody ResponseEntity<ResponseDto> updateAprendiz(@PathVariable("documento") String documento,
+    public @ResponseBody ResponseEntity<ResponseDto> updatePrograma(@PathVariable("documento") String documento,
             @Valid@ModelAttribute ProgramaDto programaDto,BindingResult validationResult,
             HttpServletRequest request){
         if(validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
         if(Objects.isNull(programasFormacionService.getProgramasFormacionByName(documento)))
-            return new ResponseEntity<>(new ActionDto("Aprendiz con el Documento:"+documento+"no existe"),
+            return new ResponseEntity<>(new ActionDto("Programa: "+documento+" no existe"),
                 HttpStatus.BAD_REQUEST);
         Programa programa = programasFormacionService.updatePrograma(programaDto, documento);
         return new ResponseEntity<>(programasFormacionService.transformDto(programa),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{documento}")
-    public @ResponseBody ResponseEntity<ResponseDto> deleteAprendixById(@PathVariable("documento") String documento){
+    public @ResponseBody ResponseEntity<ResponseDto> deletePrograma(@PathVariable("documento") String documento){
         if(Objects.isNull(programasFormacionService.getProgramasFormacionByName(documento)))
-            return new ResponseEntity<>(new ActionDto("Instructor con documento:"+documento+"no existe"),
+            return new ResponseEntity<>(new ActionDto("Programa: "+documento+" no existe"),
                 HttpStatus.BAD_REQUEST);
         programasFormacionService.disablePrograma(documento);
         return new ResponseEntity<>(new ActionDto("El Programador se merece un tinto con un mustang"),HttpStatus.ACCEPTED);
     }
      
-
     @GetMapping("/health")
     public @ResponseBody ResponseEntity<String> health() {
         return new ResponseEntity<>("OK", HttpStatus.OK);

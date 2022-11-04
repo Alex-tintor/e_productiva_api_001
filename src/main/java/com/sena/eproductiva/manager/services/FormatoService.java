@@ -29,11 +29,11 @@ public class FormatoService {
         return formatoRepository.findAll();
     } 
 
-    public Formato getFormatoById(Long id){
-        return formatoRepository.findById(id).orElse(null);
+    public Formato getFormatoById(String id){
+        return formatoRepository.findByInstructorDocument(id).orElse(null);
     }
 
-    public Formato updateFormato(FormatoDto formatoDto, Long id){
+    public Formato updateFormato(FormatoDto formatoDto, String id){
         Formato formato = this.getFormatoById(id);
         if(Objects.isNull(formato))
             formato = new Formato();

@@ -36,7 +36,7 @@ public class AprendizDto extends ResponseDto {
     @NotNull
     private String telefono;
     @NotNull
-    private Long fichaId;
+    private String fichaId;
     @NotBlank
     @NotEmpty
     @NotNull

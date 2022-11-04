@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 public class FichaDto extends ResponseDto {
 
     @NotNull
-    private long id;
+    private String id;
     @NotNull
     private String programaId;
     @NotBlank
@@ -24,7 +24,7 @@ public class FichaDto extends ResponseDto {
     @NotNull
     private String instructor;
     @NotNull
-    private Long centroId;
+    private String centroId;
     @NotNull
     private Date inicio;
     @NotNull

@@ -94,7 +94,7 @@ public class AprendicesController {
     @DeleteMapping("/{documento}")
     public @ResponseBody ResponseEntity<ResponseDto> deleteAprendixById(@PathVariable("documento") String documento){
         if(Objects.isNull(aprendicesService.getAprendicesByDocument(documento)))
-            return new ResponseEntity<>(new ActionDto("Instructor con documento:"+documento+"no existe"),
+            return new ResponseEntity<>(new ActionDto("Instructor con documento: "+documento+" no existe"),
                 HttpStatus.BAD_REQUEST);
         aprendicesService.disabreAprendiz(documento);
         return new ResponseEntity<>(new ActionDto("El Programador se merece un tinto con un mustang"),HttpStatus.ACCEPTED);

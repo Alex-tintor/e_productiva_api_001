@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 public class FormatoDto extends ResponseDto{
 
     @NotNull
-    private long id;
+    private String id;
     @NotNull
     @NotBlank
     @NotEmpty

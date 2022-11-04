@@ -21,58 +21,58 @@ public class ProgramasFormacionService {
 
     public List<Programa> getAllProgramas() {
         return programasFormacionRepository.findAll();
-        }
+      }
         
-        public Programa getProgramasFormacionByName(String nombre) {
-        return programasFormacionRepository.findByNombre(null).orElse(null);
-        }
-  
-        public Programa createPrograma(ProgramaDto programaDto) {
-        return updatePrograma(programaDto, null);
-        }
-        
-        public Programa updatePrograma(ProgramaDto programaDto, String nombre) {
-            Programa programa = this.getProgramasFormacionByName(nombre);
-         if(Objects.isNull(programa))
-              programa = new Programa();
-        programa.setId(programaDto.getId());
-        programa.setNombre(programaDto.getNombre());
-        programa.setEnabled(programaDto.isEnabled());
-        return programasFormacionRepository.save(programa);
-        } 
-  
-        public ProgramaDto transformDto(Programa programa){
-              ProgramaDto dto = new ProgramaDto();
-              dto.setId(programa.getId());
-              dto.setNombre(programa.getNombre());
-              dto.setEnabled(programa.isEnabled());
-              return dto;
-        }
-  
-        public List<ProgramaDto> transformListDto(List<Programa> programas){
-              return programas.stream().map(this::transformDto).toList();
-        }
-        
-        public Page<Programa> getPageProgramas(Pageable pageable){
-              return programasFormacionRepository.findAll(pageable);
-        }
-  
-       
-        public PageDto<ProgramaDto> getPageDtoProgramas(int page, int size) {
-              Page<Programa> programa = getPageProgramas(PageRequest.of(page, size));
-              PageDto<ProgramaDto> pageDto = new PageDto<>();
-              pageDto.setContent(this.transformListDto(programa.getContent()));
-              return pageDto;
-        }
-  
-        public boolean validateExist(ProgramaDto programaDto){
-              return Objects.nonNull(getProgramasFormacionByName(programaDto.getNombre()))
-              || Objects.nonNull(getProgramasFormacionByName(programaDto.getNombre()));
-        }
-  
-        public void disablePrograma(String documento){
-            Programa programa = getProgramasFormacionByName(documento);
-              programa.setEnabled(false);
-              programasFormacionRepository.save(programa);
-        }
+      public Programa getProgramasFormacionByName(String id) {
+      return programasFormacionRepository.findByNombre(id).orElse(null);
+      }
+
+      public Programa createPrograma(ProgramaDto programaDto) {
+      return updatePrograma(programaDto, null);
+      }
+      
+      public Programa updatePrograma(ProgramaDto programaDto, String nombre) {
+      Programa programa = this.getProgramasFormacionByName(nombre);
+      if(Objects.isNull(programa))
+            programa = new Programa();
+      programa.setId(programaDto.getId());
+      programa.setNombre(programaDto.getNombre());
+      programa.setEnabled(programaDto.isEnabled());
+      return programasFormacionRepository.save(programa);
+      } 
+
+      public ProgramaDto transformDto(Programa programa){
+            ProgramaDto dto = new ProgramaDto();
+            dto.setId(programa.getId());
+            dto.setNombre(programa.getNombre());
+            dto.setEnabled(programa.isEnabled());
+            return dto;
+      }
+
+      public List<ProgramaDto> transformListDto(List<Programa> programas){
+            return programas.stream().map(this::transformDto).toList();
+      }
+      
+      public Page<Programa> getPageProgramas(Pageable pageable){
+            return programasFormacionRepository.findAll(pageable);
+      }
+
+      
+      public PageDto<ProgramaDto> getPageDtoProgramas(int page, int size) {
+            Page<Programa> programa = getPageProgramas(PageRequest.of(page, size));
+            PageDto<ProgramaDto> pageDto = new PageDto<>();
+            pageDto.setContent(this.transformListDto(programa.getContent()));
+            return pageDto;
+      }
+
+      public boolean validateExist(ProgramaDto programaDto){
+            return Objects.nonNull(getProgramasFormacionByName(programaDto.getNombre()))
+            || Objects.nonNull(getProgramasFormacionByName(programaDto.getNombre()));
+      }
+
+      public void disablePrograma(String documento){
+      Programa programa = getProgramasFormacionByName(documento);
+            programa.setEnabled(false);
+            programasFormacionRepository.save(programa);
+      }
 }

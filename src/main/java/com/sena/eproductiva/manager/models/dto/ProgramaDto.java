@@ -16,7 +16,7 @@ public class ProgramaDto extends ResponseDto{
     @NotNull
     @NotBlank
     @NotEmpty
-    private Long id;
+    private String id;
     @NotNull
     @NotBlank
     @NotEmpty

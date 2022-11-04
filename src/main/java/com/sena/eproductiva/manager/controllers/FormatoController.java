@@ -51,7 +51,7 @@ public class FormatoController {
     }
 
     @GetMapping("/{documento}")
-    public @ResponseBody ResponseEntity<ResponseDto> getFormatoById(@PathVariable("documento") Long documento){
+    public @ResponseBody ResponseEntity<ResponseDto> getFormatoById(@PathVariable("documento") String documento){
         Formato formato = formatoService.getFormatoById(documento);
         if(Objects.isNull(formato))
             return new ResponseEntity<>(new ActionDto("El Formato con el documento:" + documento + "no existe"),
@@ -77,13 +77,13 @@ public class FormatoController {
     }
 
     @PutMapping("/{documento}")
-    public @ResponseBody ResponseEntity<ResponseDto> updateFormato(@PathVariable("documento") Long documento,
+    public @ResponseBody ResponseEntity<ResponseDto> updateFormato(@PathVariable("documento") String documento,
             @Valid @ModelAttribute FormatoDto formatoDto,BindingResult validationResult,
             HttpServletRequest request){
         if(validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
         if(Objects.isNull(formatoService.getFormatoById(documento)))
-            return new ResponseEntity<>(new ActionDto("Formato con el Documento:"+documento+"no existe"),
+            return new ResponseEntity<>(new ActionDto("Formato con el Documento: "+documento+" no existe"),
                 HttpStatus.BAD_REQUEST);
         Formato formato = formatoService.updateFormato(formatoDto, documento);
         return new ResponseEntity<>(formatoService.transformDto(formato),HttpStatus.ACCEPTED);

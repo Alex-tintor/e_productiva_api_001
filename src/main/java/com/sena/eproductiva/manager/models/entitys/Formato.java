@@ -19,8 +19,8 @@ import lombok.Data;
 public class Formato implements GeneralEntity{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(length = 36)
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "instructor")

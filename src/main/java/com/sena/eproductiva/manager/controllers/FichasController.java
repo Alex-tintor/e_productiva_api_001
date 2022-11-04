@@ -50,7 +50,7 @@ public class FichasController {
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> getFichaById(@PathVariable("id") Long id){
+    public @ResponseBody ResponseEntity<ResponseDto> getFichaById(@PathVariable("id")String id){
         Ficha ficha = fichasService.getFichaById(id);
         if(Objects.isNull(ficha))
             return new ResponseEntity<>(new ActionDto("La Ficha de formacion:"+id+"no existe"),HttpStatus.BAD_REQUEST);
@@ -75,7 +75,7 @@ public class FichasController {
     }
 
     @PutMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> updateFicha(@Valid @PathVariable("id") Long id, @ModelAttribute FichaDto fichaDto, BindingResult validationResult,
+    public @ResponseBody ResponseEntity<ResponseDto> updateFicha(@Valid @PathVariable("id") String id, @ModelAttribute FichaDto fichaDto, BindingResult validationResult,
             HttpServletRequest request){
         if(validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
@@ -87,9 +87,9 @@ public class FichasController {
     }
 
     @DeleteMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> unabledFicha(@PathVariable("id") Long id){
+    public @ResponseBody ResponseEntity<ResponseDto> unabledFicha(@PathVariable("id") String id){
         if(Objects.isNull(fichasService.getFichaById(id)))
-            return new ResponseEntity<>(new ActionDto("La Ficha:"+id+"no existe"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ActionDto("La Ficha: "+id+" no existe"),HttpStatus.BAD_REQUEST);
         fichasService.disabledFicha(id);
         return new ResponseEntity<>(new ActionDto("viernes 21 de octubre y son las 11:22 de la noche :D"),HttpStatus.ACCEPTED);
     }

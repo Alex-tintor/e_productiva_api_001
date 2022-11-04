@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 public class CentroFormacionDto extends ResponseDto {
 
     @NotNull
-    private long uuid;
+    private String uuid;
     @NotBlank
     @NotEmpty
     @NotNull

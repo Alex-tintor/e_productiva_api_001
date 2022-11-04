@@ -15,8 +15,8 @@ import lombok.Data;
 public class Centro implements GeneralEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long uuid;
+    @Column(length = 36)
+    private String uuid;
 
     @Column(length = 75, nullable = false)
     private String nombre;

@@ -12,6 +12,6 @@ import com.sena.eproductiva.manager.models.entitys.Programa;
 @Repository
 public interface ProgramasFormacionRepository extends JpaRepository<Programa, Long>, JpaSpecificationExecutor<Programa> {
         
-        @Query(value = "select p from Programa p where p.nombre = :id")
-        public Optional<Programa> findByNombre(@Param("id") String nombre);
+        @Query(value = "select p from Programa p where p.nombre = :id or p.id = :id")
+        public Optional<Programa> findByNombre(@Param("id") String id);
 }

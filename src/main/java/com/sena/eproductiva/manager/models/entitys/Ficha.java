@@ -21,8 +21,8 @@ import lombok.Data;
 public class Ficha implements GeneralEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(length = 36)
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "programaId")

@@ -63,7 +63,7 @@ public class CentroFormacionController {
 
     @PostMapping()
     public @ResponseBody ResponseEntity<ResponseDto> createCentro(
-            @Valid @RequestBody CentroFormacionDto centroFormacionDto, BindingResult validationResult,
+            @Valid @ModelAttribute CentroFormacionDto centroFormacionDto, BindingResult validationResult,
             HttpServletRequest request){
         if(validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
@@ -94,7 +94,7 @@ public class CentroFormacionController {
     @DeleteMapping("/{id}")
     public @ResponseBody ResponseEntity<ResponseDto> unabledCentro(@PathVariable("id") String id){
         if(Objects.isNull(centroFormacionService.getCentroFormacionById(id)))
-            return new ResponseEntity<>(new ActionDto("el Centro:"+id+"no existe"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ActionDto("el Centro: "+id+" no existe"),HttpStatus.BAD_REQUEST);
         centroFormacionService.disableCentro(id);
         return new ResponseEntity<>(new ActionDto("viernes 21 de octubre y son las 11:22 de la noche :D"),HttpStatus.ACCEPTED);
     }
