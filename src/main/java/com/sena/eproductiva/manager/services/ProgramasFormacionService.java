@@ -13,6 +13,7 @@ import com.sena.eproductiva.manager.repositories.ProgramasFormacionRepository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class ProgramasFormacionService {
@@ -50,7 +51,7 @@ public class ProgramasFormacionService {
       }
 
       public List<ProgramaDto> transformListDto(List<Programa> programas){
-            return programas.stream().map(this::transformDto).toList();
+            return programas.stream().map(this::transformDto).collect(Collectors.toList());
       }
       
       public Page<Programa> getPageProgramas(Pageable pageable){

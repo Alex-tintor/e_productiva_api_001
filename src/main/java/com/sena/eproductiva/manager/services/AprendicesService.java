@@ -2,6 +2,7 @@ package com.sena.eproductiva.manager.services;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -69,7 +70,7 @@ public class AprendicesService {
       }
 
       public List<AprendizDto> transformListDto(List<Aprendiz> aprendices){
-            return aprendices.stream().map(this::transformDto).toList();
+            return aprendices.stream().map(this::transformDto).collect(Collectors.toList());
       }
       
       public Page<Aprendiz> getPageAprendices(Pageable pageable){

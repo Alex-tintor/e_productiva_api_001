@@ -2,6 +2,7 @@ package com.sena.eproductiva.manager.services;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -70,7 +71,7 @@ public class FichasService {
     }
 
     public List<FichaDto> transformListDto(List<Ficha> fichas){
-        return fichas.stream().map(this::transfomrDto).toList();
+        return fichas.stream().map(this::transfomrDto).collect(Collectors.toList());
     }
 
     public Page<Ficha> getPageFicha(Pageable pageable){

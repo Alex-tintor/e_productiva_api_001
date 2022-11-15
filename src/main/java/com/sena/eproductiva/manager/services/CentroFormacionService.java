@@ -13,6 +13,8 @@ import com.sena.eproductiva.manager.repositories.CentroFormacionRepository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -51,7 +53,7 @@ public class CentroFormacionService {
     }
 
     public List<CentroFormacionDto> transformListDtos(List<Centro> centros){
-        return centros.stream().map(this::transformDto).toList();
+        return centros.stream().map(this::transformDto).collect(Collectors.toList());
     }
 
     public Page<Centro> getPageCentro(Pageable pageable){

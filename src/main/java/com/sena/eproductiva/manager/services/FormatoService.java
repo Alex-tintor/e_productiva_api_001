@@ -2,6 +2,7 @@ package com.sena.eproductiva.manager.services;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -56,7 +57,7 @@ public class FormatoService {
     }
 
     public List<FormatoDto> transformListDtos(List<Formato> formatos){
-        return formatos.stream().map(this::transformDto).toList();
+        return formatos.stream().map(this::transformDto).collect(Collectors.toList());
     }
 
     public Page<Formato> getPageFormato(Pageable pageable){
