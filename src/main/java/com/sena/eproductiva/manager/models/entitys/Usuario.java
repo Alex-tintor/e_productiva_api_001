@@ -34,7 +34,7 @@ public class Usuario implements GeneralEntity{
     @Column(nullable = false, length = 70, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 11, unique = true)
+    @Column(nullable = false, unique = true)
     private String telefono;
 
     @Column(nullable = false)

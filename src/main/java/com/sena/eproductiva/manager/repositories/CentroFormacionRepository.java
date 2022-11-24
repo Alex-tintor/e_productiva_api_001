@@ -10,8 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.sena.eproductiva.manager.models.entitys.Centro;
 
 @Repository
-public interface CentroFormacionRepository extends JpaRepository<Centro, Long>, JpaSpecificationExecutor<Centro> {
+public interface CentroFormacionRepository extends JpaRepository<Centro, String>, JpaSpecificationExecutor<Centro> {
 
         @Query(value="select c from Centro c where c.nombre = :id or c.uuid = :id")
         public Optional<Centro> findByName(@Param("id") String id);
+
 }

@@ -54,7 +54,7 @@ public class CentroFormacionController {
     public @ResponseBody ResponseEntity<ResponseDto> getCentroById(@PathVariable("id") String id){
         Centro centro = centroFormacionService.getCentroFormacionById(id);
         if(Objects.isNull(centro))
-            return new ResponseEntity<>(new ActionDto("El centro con nombre/id:"+id+"no existe"),
+            return new ResponseEntity<>(new ActionDto("El centro con nombre/id: "+id+" no existe"),
                 HttpStatus.BAD_REQUEST);
         CentroFormacionDto response = centroFormacionService.transformDto(centro);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,8 +31,6 @@ import com.sena.eproductiva.manager.models.entitys.Aprendiz;
 import com.sena.eproductiva.manager.models.enums.ResponseType;
 import com.sena.eproductiva.manager.services.AprendicesService;
 import com.sena.eproductiva.manager.services.MessageService;
-import org.springframework.web.bind.annotation.PutMapping;
-
 
 @RestController
 @CrossOrigin("*")
@@ -44,10 +43,9 @@ public class AprendicesController {
     @Autowired
     private MessageService messageService;
 
-    @GetMapping
-    public @ResponseBody ResponseEntity<ResponseDto> getAprendices(@RequestHeader("page-number") Integer page,
-            @RequestHeader("page-size") Integer size){ 
-        PageDto<AprendizDto> response = aprendicesService.getPageDtoAprendices(page, size);
+    @GetMapping()
+    public @ResponseBody ResponseEntity<ResponseDto> getAllAprendices(@RequestHeader("page-number") Integer page ,@RequestHeader("page-size") Integer size){
+        PageDto<AprendizDto> response = aprendicesService.getPageDtoAprendiz(page,size);
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
 

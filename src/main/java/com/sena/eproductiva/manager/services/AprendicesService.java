@@ -73,15 +73,14 @@ public class AprendicesService {
             return aprendices.stream().map(this::transformDto).collect(Collectors.toList());
       }
       
-      public Page<Aprendiz> getPageAprendices(Pageable pageable){
+      public Page<Aprendiz> getPageAprendiz(Pageable pageable){
             return aprendicesRepository.findAll(pageable);
       }
-
-     
-      public PageDto<AprendizDto> getPageDtoAprendices(int page, int size) {
-            Page<Aprendiz> aprendices = getPageAprendices(PageRequest.of(page, size));
+    
+      public PageDto<AprendizDto> getPageDtoAprendiz(int page, int size){
+            Page<Aprendiz> aprendiz = getPageAprendiz(PageRequest.of(page, size));
             PageDto<AprendizDto> pageDto = new PageDto<>();
-            pageDto.setContent(this.transformListDto(aprendices.getContent()));
+            pageDto.setContent(this.transformListDto(aprendiz.getContent()));
             return pageDto;
       }
 
