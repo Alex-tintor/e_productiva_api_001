@@ -115,7 +115,7 @@ public class AprendicesService {
       public PageDto<AprendizDto> getPageDtoAprendices(int page, int size) {
             Page<Aprendiz> aprendices = getPageAprendices(PageRequest.of(page, size));
             PageDto<AprendizDto> pageDto = new PageDto<>();
-            pageDto.setContent(this.transformListDto(aprendiz.getContent()));
+            pageDto.setContent(this.transformListDto(aprendices.getContent()));
             return pageDto;
       }
 

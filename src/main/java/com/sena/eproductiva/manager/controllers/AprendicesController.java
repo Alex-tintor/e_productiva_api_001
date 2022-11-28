@@ -55,12 +55,6 @@ public class AprendicesController {
             @RequestHeader("page-size") Integer size) {
         PageDto<AprendizDto> response = aprendicesService.getPageDtoAprendices(page, size);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
-
-    @GetMapping()
-    public @ResponseBody ResponseEntity<ResponseDto> getAllAprendices(@RequestHeader("page-number") Integer page,
-            @RequestHeader("page-size") Integer size) {
-        PageDto<AprendizDto> response = aprendicesService.getPageDtoAprendiz(page, size);
-        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     /**
