@@ -15,6 +15,10 @@ public enum ResponseType {
     @Getter
     private String message;
 
+    /**
+     * 
+     * @param message recibe un tipo de respuesta
+     */
     ResponseType(String message) {
         this.message = message;
     }

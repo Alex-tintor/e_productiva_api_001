@@ -27,6 +27,11 @@ public class PageDto<T> extends ResponseDto {
     private Integer numberOfElements;
     private Sort sort;
 
+    /**
+     * Constructor
+     * 
+     * @param page recibe una clase generica tipo Page
+     */
     public PageDto(Page<GeneralEntity> page) {
         this.setPageable(page.getPageable());
         this.setLast(page.isLast());

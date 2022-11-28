@@ -1,7 +1,5 @@
 package com.sena.eproductiva.manager.models.entitys;
 
-
-
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -24,6 +22,10 @@ public class Ficha implements GeneralEntity {
     @Column(length = 36)
     private String id;
 
+    /*
+     * Relacion muchos a uno, un Programa puede pertenecer a muchas Fichas,
+     * una Ficha solo puede tener un Programa
+     */
     @ManyToOne
     @JoinColumn(name = "programaId")
     Programa programaFormacionEntity;
@@ -35,6 +37,10 @@ public class Ficha implements GeneralEntity {
     @JoinColumn(name = "instructor")
     Instructor instructorEntity;
 
+    /*
+     * Relacion muchos a uno, un Centro puede tener muchas fichas,
+     * una Ficha solo puede pertenecer a un Centro
+     */
     @ManyToOne
     @JoinColumn(name = "centroId")
     Centro centroFormacionEntity;

@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class UserDto extends ResponseDto {
-    
+
     @NotBlank
     @NotEmpty
     @NotNull
@@ -45,5 +45,5 @@ public class UserDto extends ResponseDto {
     @NotEmpty
     @NotNull
     private String documentoType;
-    
+
 }

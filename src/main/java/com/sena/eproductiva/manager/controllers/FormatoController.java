@@ -36,30 +36,51 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @CrossOrigin("*")
 @RequestMapping("/seguimientos")
 public class FormatoController {
-    
+
     @Autowired
     private FormatoService formatoService;
 
     @Autowired
     private MessageService messageService;
 
+    /**
+     * Metodo para obtener todos los Formatos
+     * 
+     * @param page resive el numero de paginas
+     * @param size resive el tamaño de la pagina
+     * @return retorna los Formatos y el estado de la peticion
+     */
     @GetMapping()
     public @ResponseBody ResponseEntity<ResponseDto> getAllFormatos(@RequestHeader("page-number") Integer page,
-    @RequestHeader("page-size") Integer size){
-    PageDto<FormatoDto> response = formatoService.getPageDtoFormato(page, size);
-    return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+            @RequestHeader("page-size") Integer size) {
+        PageDto<FormatoDto> response = formatoService.getPageDtoFormato(page, size);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para obtener un Formato por medio de un id
+     * 
+     * @param documento resive el documeto del Formato a consultar
+     * @return retorna el Formato y el estado de la peticion
+     */
     @GetMapping("/{documento}")
-    public @ResponseBody ResponseEntity<ResponseDto> getFormatoById(@PathVariable("documento") String documento){
+    public @ResponseBody ResponseEntity<ResponseDto> getFormatoById(@PathVariable("documento") String documento) {
         Formato formato = formatoService.getFormatoById(documento);
-        if(Objects.isNull(formato))
+        if (Objects.isNull(formato))
             return new ResponseEntity<>(new ActionDto("El Formato con el documento:" + documento + "no existe"),
-                HttpStatus.BAD_REQUEST);
+                    HttpStatus.BAD_REQUEST);
         FormatoDto response = formatoService.transformDto(formato);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para crear un Formato
+     * 
+     * @param formatoDto       resive el dto de Formato
+     * @param validationResult resive errores de registro
+     * @param request          resive el estado de la peticion
+     * @return retorna el nuevo Formato y el estatus de Created
+     */
     @PostMapping()
     public @ResponseBody ResponseEntity<ResponseDto> createFormato(
             @Valid @ModelAttribute FormatoDto formatoDto, BindingResult validationResult,
@@ -73,23 +94,36 @@ public class FormatoController {
                     HttpStatus.BAD_REQUEST);
         }
         Formato formato = formatoService.createFormato(formatoDto);
-        return new ResponseEntity<>(formatoService.transformDto(formato),HttpStatus.CREATED);
+        return new ResponseEntity<>(formatoService.transformDto(formato), HttpStatus.CREATED);
     }
 
+    /**
+     * Metodo para actualizar un Formato por medio de un identificador
+     * 
+     * @param documento        resive el identificador del Formato a modificar
+     * @param formatoDto       resive el dto de Formato
+     * @param validationResult resive errores de registro
+     * @param request          resive el estado de la peticion
+     * @return retorna el Formato actualizado y el estado de la peticion
+     */
     @PutMapping("/{documento}")
     public @ResponseBody ResponseEntity<ResponseDto> updateFormato(@PathVariable("documento") String documento,
-            @Valid @ModelAttribute FormatoDto formatoDto,BindingResult validationResult,
-            HttpServletRequest request){
-        if(validationResult.hasErrors())
+            @Valid @ModelAttribute FormatoDto formatoDto, BindingResult validationResult,
+            HttpServletRequest request) {
+        if (validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
-        if(Objects.isNull(formatoService.getFormatoById(documento)))
-            return new ResponseEntity<>(new ActionDto("Formato con el Documento: "+documento+" no existe"),
-                HttpStatus.BAD_REQUEST);
+        if (Objects.isNull(formatoService.getFormatoById(documento)))
+            return new ResponseEntity<>(new ActionDto("Formato con el Documento: " + documento + " no existe"),
+                    HttpStatus.BAD_REQUEST);
         Formato formato = formatoService.updateFormato(formatoDto, documento);
-        return new ResponseEntity<>(formatoService.transformDto(formato),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(formatoService.transformDto(formato), HttpStatus.ACCEPTED);
     }
 
-
+    /**
+     * Metodo para verificar el funcionamiento del controlador
+     * 
+     * @return retorna el estado de la peticion
+     */
     @GetMapping("/health")
     public @ResponseBody ResponseEntity<String> health() {
         return new ResponseEntity<>("OK", HttpStatus.OK);

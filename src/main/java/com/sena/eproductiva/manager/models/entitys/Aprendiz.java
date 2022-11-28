@@ -17,13 +17,19 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "aprendices")
-public class Aprendiz extends Usuario{
+public class Aprendiz extends Usuario {
 
+    /*
+     * @ManyToOne define relacion muchos a uno.
+     * 
+     * @JoinColumn une las tables que se relacionan por medio de una FK.
+     * Una Ficha puede tener muchos Aprendiz,
+     * Un Aprendiz solo puede pertenecer a una Ficha
+     */
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_APRENDIZ_FICHA"))
     private Ficha ficha;
 
-    @Column(nullable = false, length = 11,name = "etapa")
+    @Column(nullable = false, length = 11, name = "etapa")
     private EtapaType etapa;
-
 }

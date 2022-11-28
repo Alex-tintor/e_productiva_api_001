@@ -10,8 +10,14 @@ import org.springframework.stereotype.Repository;
 import com.sena.eproductiva.manager.models.entitys.Ficha;
 
 @Repository
- public interface FichasRepository extends JpaRepository<Ficha, Long>, JpaSpecificationExecutor<Ficha> {
+public interface FichasRepository extends JpaRepository<Ficha, Long>, JpaSpecificationExecutor<Ficha> {
 
-     @Query(value = "select f from Ficha f where f.id = :id ")
-     public Optional<Ficha> findFichaByAnyId(@Param("id")String id);
+    /**
+     * Metodo que devuelve todo de una Ficha por medio de un id
+     * 
+     * @param id identificado unico de una Ficha
+     * @return retorna todo de Ficha
+     */
+    @Query(value = "select f from Ficha f where f.id = :id ")
+    public Optional<Ficha> findFichaByAnyId(@Param("id") String id);
 }

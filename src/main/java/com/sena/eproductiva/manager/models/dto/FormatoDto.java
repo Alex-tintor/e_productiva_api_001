@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class FormatoDto extends ResponseDto{
+public class FormatoDto extends ResponseDto {
 
     @NotNull
     private String id;
@@ -22,5 +22,5 @@ public class FormatoDto extends ResponseDto{
     private String instructor;
     @NotNull
     private Date fecha;
-    
+
 }

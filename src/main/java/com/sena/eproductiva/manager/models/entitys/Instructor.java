@@ -14,10 +14,15 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "instructores")
+// Esta clase hereda los atributos y metodos de la clase Padre Usuario
 public class Instructor extends Usuario {
-
+    /*
+     * @ManyToOne define una relacion de muchos a uno
+     * 
+     * @JoinColumn une las tablas por medio de una llave foranea (Centro)
+     */
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_INSTRUCTOR_CENTRO"))
     private Centro centro;
-    
+
 }

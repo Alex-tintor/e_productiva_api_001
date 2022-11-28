@@ -13,13 +13,14 @@ import com.sena.eproductiva.manager.models.enums.DocumentoType;
 
 import lombok.Data;
 
-@Data
+@Data // Genera Getter, Setter, RequiredArgsConstructor, ToString, EqualsAndHashCode
 @Inheritance(strategy = InheritanceType.JOINED)
-@Entity
-public class Usuario implements GeneralEntity{
+@Entity // Especifica que la clase es una Entidad en BD.
+// Clase padre que hereda a Aprendiz e Instructor
+public class Usuario implements GeneralEntity {
 
-    @Id
-    @Column(length = 36)
+    @Id // Especifica la llave primaria de la Entidad
+    @Column(length = 36) // Especifica una columna en la Entidad con un tamaño de 36 caracteres
     private String uuid;
 
     @Column(nullable = false, length = 12, unique = true)
@@ -31,7 +32,8 @@ public class Usuario implements GeneralEntity{
     @Column(nullable = false, length = 45)
     private String apellido;
 
-    @Column(nullable = false, length = 70, unique = true)
+    @Column(nullable = false, length = 70, unique = true) // Especifica que la columna es not null, de maximo 70
+                                                          // caracteres y de llave unica
     private String email;
 
     @Column(nullable = false, length = 11, unique = true)
@@ -43,6 +45,10 @@ public class Usuario implements GeneralEntity{
     @Column(nullable = false, name = "tipo_documento")
     private DocumentoType type;
 
+    /*
+     * Este metodo agrega un valor al azar al atributo uuid de tipo String si el
+     * uuid es vacio o menor a 32 caracteres
+     */
     @PrePersist
     private void confirmarInformacion() {
         if (this.uuid == null || this.uuid.length() < 32) {

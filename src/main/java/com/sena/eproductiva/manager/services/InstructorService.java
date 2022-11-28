@@ -25,25 +25,50 @@ public class InstructorService {
     @Autowired
     private CentroFormacionService centroFormacionService;
 
+    /**
+     * 
+     * @return
+     */
     public List<Instructor> getInstructores() {
         return instructorRepository.findAll();
     }
 
+    /**
+     * 
+     * @param uuid
+     * @return
+     */
     public Instructor getInstructorByUUID(String uuid) {
         return instructorRepository.findById(uuid).orElse(null);
     }
 
+    /**
+     * 
+     * @param documento
+     * @return
+     */
     public Instructor getInstructorByDocumento(String documento) {
         return instructorRepository.findByDocumento(documento).orElse(null);
     }
 
+    /**
+     * 
+     * @param instructorDto
+     * @return
+     */
     public Instructor createInstructor(InstructorDto instructorDto) {
         return updateInstructor(instructorDto, null);
     }
 
-    public Instructor updateInstructor(InstructorDto instructorDto,String documento) {
+    /**
+     * 
+     * @param instructorDto
+     * @param documento
+     * @return
+     */
+    public Instructor updateInstructor(InstructorDto instructorDto, String documento) {
         Instructor instructor = this.getInstructorByDocumento(documento);
-        if(Objects.isNull(instructor))
+        if (Objects.isNull(instructor))
             instructor = new Instructor();
         instructor.setApellido(instructorDto.getApellido());
         instructor.setNombre(instructorDto.getNombre());
@@ -56,6 +81,11 @@ public class InstructorService {
         return instructorRepository.save(instructor);
     }
 
+    /**
+     * 
+     * @param instructor
+     * @return
+     */
     public InstructorDto transformDto(Instructor instructor) {
         InstructorDto dto = new InstructorDto();
         dto.setApellido(instructor.getApellido());
@@ -69,14 +99,30 @@ public class InstructorService {
         return dto;
     }
 
+    /**
+     * 
+     * @param instructores
+     * @return
+     */
     public List<InstructorDto> transformListDto(List<Instructor> instructores) {
         return instructores.stream().map(this::transformDto).collect(Collectors.toList());
     }
 
+    /**
+     * 
+     * @param pageable
+     * @return
+     */
     public Page<Instructor> getPageInstructores(Pageable pageable) {
         return instructorRepository.findAll(pageable);
     }
 
+    /**
+     * 
+     * @param page
+     * @param size
+     * @return
+     */
     public PageDto<InstructorDto> getPageDtoInstructores(int page, int size) {
         Page<Instructor> instructores = getPageInstructores(PageRequest.of(page, size));
         PageDto<InstructorDto> pageDto = new PageDto<>();
@@ -84,13 +130,22 @@ public class InstructorService {
         return pageDto;
     }
 
+    /**
+     * 
+     * @param instructor
+     * @return
+     */
     public boolean validarExistencia(InstructorDto instructor) {
         return Objects.nonNull(getInstructorByDocumento(instructor.getTelefono()))
                 || Objects.nonNull(getInstructorByDocumento(instructor.getDocumento()))
                 || Objects.nonNull(getInstructorByDocumento(instructor.getEmail()));
     }
 
-    public void disableInstructor(String documento){
+    /**
+     * 
+     * @param documento
+     */
+    public void disableInstructor(String documento) {
         Instructor instructor = getInstructorByDocumento(documento);
         instructor.setEnabled(false);
         instructorRepository.save(instructor);

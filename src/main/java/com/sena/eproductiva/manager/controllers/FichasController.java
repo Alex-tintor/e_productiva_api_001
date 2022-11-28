@@ -43,21 +43,45 @@ public class FichasController {
     @Autowired
     MessageService messageService;
 
+    /**
+     * Metodo para obtener las Fichas
+     * 
+     * @param page resive el numero de pagina
+     * @param size resive el tamño de la pagina
+     * @return retorna las Fichas y el estatus de aceptado
+     */
     @GetMapping
-    public @ResponseBody ResponseEntity<ResponseDto> getFichas(@RequestHeader("page-number") Integer page, @RequestHeader("page-size") Integer size){
-        PageDto<FichaDto> response = fichasService.getFichasDtoPage(page,size);
-        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+    public @ResponseBody ResponseEntity<ResponseDto> getFichas(@RequestHeader("page-number") Integer page,
+            @RequestHeader("page-size") Integer size) {
+        PageDto<FichaDto> response = fichasService.getFichasDtoPage(page, size);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para obtener una Ficha con un id
+     * 
+     * @param id resive el identificador de la ficha
+     * @return retorna la Ficha y el estatus de aceptado, si la ficha no existe
+     *         retorna un bad request
+     */
     @GetMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> getFichaById(@PathVariable("id")String id){
+    public @ResponseBody ResponseEntity<ResponseDto> getFichaById(@PathVariable("id") String id) {
         Ficha ficha = fichasService.getFichaById(id);
-        if(Objects.isNull(ficha))
-            return new ResponseEntity<>(new ActionDto("La Ficha de formacion:"+id+"no existe"),HttpStatus.BAD_REQUEST);
+        if (Objects.isNull(ficha))
+            return new ResponseEntity<>(new ActionDto("La Ficha de formacion:" + id + "no existe"),
+                    HttpStatus.BAD_REQUEST);
         FichaDto response = fichasService.transfomrDto(ficha);
-        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para crear una Ficha nueva
+     * 
+     * @param fichaDto         resive el dto de Ficha
+     * @param validationResult resive errores de registro
+     * @param request          resive el estado de la peticion
+     * @return retorna una nueva Ficha y el estado de creado
+     */
     @PostMapping()
     public @ResponseBody ResponseEntity<ResponseDto> createFicha(
             @Valid @ModelAttribute FichaDto fichaDto, BindingResult validationResult,
@@ -74,26 +98,48 @@ public class FichasController {
         return new ResponseEntity<>(fichasService.transfomrDto(ficha), HttpStatus.CREATED);
     }
 
+    /**
+     * Metodo para actualizar una ficha
+     * 
+     * @param id               resive el id de la ficha a modificar
+     * @param fichaDto         resive el dto de Ficha
+     * @param validationResult resive errores de registro
+     * @param request          resive el estado de la peticion
+     * @return retorna la Ficha actualizada y el estatus de la peticion
+     */
     @PutMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> updateFicha(@Valid @PathVariable("id") String id, @ModelAttribute FichaDto fichaDto, BindingResult validationResult,
-            HttpServletRequest request){
-        if(validationResult.hasErrors())
+    public @ResponseBody ResponseEntity<ResponseDto> updateFicha(@Valid @PathVariable("id") String id,
+            @ModelAttribute FichaDto fichaDto, BindingResult validationResult,
+            HttpServletRequest request) {
+        if (validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
-        if(Objects.isNull(fichasService.getFichaById(id))){
-            return new ResponseEntity<>(new ActionDto("La Ficha:"+id+"no existe"),HttpStatus.BAD_REQUEST);
+        if (Objects.isNull(fichasService.getFichaById(id))) {
+            return new ResponseEntity<>(new ActionDto("La Ficha:" + id + "no existe"), HttpStatus.BAD_REQUEST);
         }
         Ficha ficha = fichasService.createFicha(fichaDto);
-        return new ResponseEntity<>(fichasService.transfomrDto(ficha) ,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(fichasService.transfomrDto(ficha), HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para deshabilitar una Ficha
+     * 
+     * @param id resive el id de la ficha a deshabilitar
+     * @return retorna el estatus de la peticion
+     */
     @DeleteMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> unabledFicha(@PathVariable("id") String id){
-        if(Objects.isNull(fichasService.getFichaById(id)))
-            return new ResponseEntity<>(new ActionDto("La Ficha: "+id+" no existe"),HttpStatus.BAD_REQUEST);
+    public @ResponseBody ResponseEntity<ResponseDto> unabledFicha(@PathVariable("id") String id) {
+        if (Objects.isNull(fichasService.getFichaById(id)))
+            return new ResponseEntity<>(new ActionDto("La Ficha: " + id + " no existe"), HttpStatus.BAD_REQUEST);
         fichasService.disabledFicha(id);
-        return new ResponseEntity<>(new ActionDto("viernes 21 de octubre y son las 11:22 de la noche :D"),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(new ActionDto("viernes 21 de octubre y son las 11:22 de la noche :D"),
+                HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para verificar el funcionamiento del controlador
+     * 
+     * @return retorna el estado de la peticion
+     */
     @GetMapping("/health")
     public @ResponseBody ResponseEntity<String> health() {
         return new ResponseEntity<>("OK", HttpStatus.OK);

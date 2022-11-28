@@ -37,68 +37,112 @@ import com.sena.eproductiva.manager.services.MessageService;
 @CrossOrigin("*")
 @RequestMapping("/centros")
 public class CentroFormacionController {
-    
+
     @Autowired
     CentroFormacionService centroFormacionService;
 
     @Autowired
     MessageService messageService;
 
+    /**
+     * Metodo para obtener los centros de formacion
+     * 
+     * @param page resive el numero de la pagina
+     * @param size resive el tamaño de la pagina
+     * @return retorna el response y el estatus de aceptado
+     */
     @GetMapping()
-    public @ResponseBody ResponseEntity<ResponseDto> getCentros(@RequestHeader("page-number") Integer page ,@RequestHeader("page-size") Integer size){
-        PageDto<CentroFormacionDto> response = centroFormacionService.getPageDtoCentro(page,size);
-        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+    public @ResponseBody ResponseEntity<ResponseDto> getCentros(@RequestHeader("page-number") Integer page,
+            @RequestHeader("page-size") Integer size) {
+        PageDto<CentroFormacionDto> response = centroFormacionService.getPageDtoCentro(page, size);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para obtener un Centro por medio de un id, si el objeto es null
+     * retorna un mensaje de error
+     * 
+     * @param id resive un identificador de Centro
+     * @return retorna el Centro y el estatus de la peticion
+     */
     @GetMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> getCentroById(@PathVariable("id") String id){
+    public @ResponseBody ResponseEntity<ResponseDto> getCentroById(@PathVariable("id") String id) {
         Centro centro = centroFormacionService.getCentroFormacionById(id);
-        if(Objects.isNull(centro))
-            return new ResponseEntity<>(new ActionDto("El centro con nombre/id:"+id+"no existe"),
-                HttpStatus.BAD_REQUEST);
+        if (Objects.isNull(centro))
+            return new ResponseEntity<>(new ActionDto("El centro con nombre/id:" + id + "no existe"),
+                    HttpStatus.BAD_REQUEST);
         CentroFormacionDto response = centroFormacionService.transformDto(centro);
-        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
-        
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+
     }
 
+    /**
+     * Metodo para crear Centros de Formacion, retorna error si el Centro ya existe
+     * 
+     * @param centroFormacionDto resive el Dto de Centro
+     * @param validationResult   resive errores
+     * @param request            resive el estatus de la peticion
+     * @return retorna un Dto de Centro y el estado de la peticion
+     */
     @PostMapping()
     public @ResponseBody ResponseEntity<ResponseDto> createCentro(
             @Valid @ModelAttribute CentroFormacionDto centroFormacionDto, BindingResult validationResult,
-            HttpServletRequest request){
-        if(validationResult.hasErrors())
+            HttpServletRequest request) {
+        if (validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
-        if(centroFormacionService.validateExist(centroFormacionDto)){
-            String[] error = {"El centro ya existe"};
+        if (centroFormacionService.validateExist(centroFormacionDto)) {
+            String[] error = { "El centro ya existe" };
             return new ResponseEntity<>(
-                new InvalidDto(ResponseType.ENTITY_EXIST, Arrays.asList(error), request.getRequestURI()),
-                HttpStatus.BAD_REQUEST);
+                    new InvalidDto(ResponseType.ENTITY_EXIST, Arrays.asList(error), request.getRequestURI()),
+                    HttpStatus.BAD_REQUEST);
         }
         Centro centro = centroFormacionService.createCentro(centroFormacionDto);
         return new ResponseEntity<>(centroFormacionService.transformDto(centro), HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para actualizar un Centro de formacion
+     * 
+     * @param id                 resive un identificador de Centro
+     * @param centroFormacionDto resive el Dto de Centro
+     * @param validationResult   resive el estatus de la validacion
+     * @param request            resive el estatus de la peticion
+     * @return retorna el Centro actualizado y el estatus de la peticion
+     */
     @PutMapping("/{id}")
     public @ResponseBody ResponseEntity<ResponseDto> updateCentro(
-            @PathVariable("id") String id,@Valid @RequestBody CentroFormacionDto centroFormacionDto,
-            BindingResult validationResult, HttpServletRequest request){
-        if(validationResult.hasErrors())
+            @PathVariable("id") String id, @Valid @RequestBody CentroFormacionDto centroFormacionDto,
+            BindingResult validationResult, HttpServletRequest request) {
+        if (validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
-        if(Objects.isNull(centroFormacionService.getCentroFormacionById(id))){
-            return new ResponseEntity<>(new ActionDto("el Centro:"+id+"no existe"),HttpStatus.BAD_REQUEST);
+        if (Objects.isNull(centroFormacionService.getCentroFormacionById(id))) {
+            return new ResponseEntity<>(new ActionDto("el Centro:" + id + "no existe"), HttpStatus.BAD_REQUEST);
         }
-        Centro centro = centroFormacionService.updateCentro(centroFormacionDto,id);
+        Centro centro = centroFormacionService.updateCentro(centroFormacionDto, id);
         CentroFormacionDto response = centroFormacionService.transformDto(centro);
-        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para deshabilitar un Centro por medio de un id
+     * 
+     * @param id resive el centro a deshabilitar
+     * @return retorna el estado de la peticion
+     */
     @DeleteMapping("/{id}")
-    public @ResponseBody ResponseEntity<ResponseDto> unabledCentro(@PathVariable("id") String id){
-        if(Objects.isNull(centroFormacionService.getCentroFormacionById(id)))
-            return new ResponseEntity<>(new ActionDto("el Centro: "+id+" no existe"),HttpStatus.BAD_REQUEST);
+    public @ResponseBody ResponseEntity<ResponseDto> unabledCentro(@PathVariable("id") String id) {
+        if (Objects.isNull(centroFormacionService.getCentroFormacionById(id)))
+            return new ResponseEntity<>(new ActionDto("el Centro: " + id + " no existe"), HttpStatus.BAD_REQUEST);
         centroFormacionService.disableCentro(id);
-        return new ResponseEntity<>(new ActionDto("viernes 21 de octubre y son las 11:22 de la noche :D"),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(new ActionDto("viernes 21 de octubre y son las 11:22 de la noche :D"),
+                HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para verificar que el controlador este funcionando
+     * 
+     * @return retorna el estado de la peticion
+     */
     @GetMapping("/health")
     public @ResponseBody ResponseEntity<String> health() {
         return new ResponseEntity<>("OK", HttpStatus.OK);

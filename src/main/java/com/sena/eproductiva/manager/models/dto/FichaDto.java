@@ -1,4 +1,4 @@
- package com.sena.eproductiva.manager.models.dto;
+package com.sena.eproductiva.manager.models.dto;
 
 import java.sql.Date;
 
@@ -10,7 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class FichaDto extends ResponseDto {
 
     @NotNull

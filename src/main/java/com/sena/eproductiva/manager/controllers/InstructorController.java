@@ -43,14 +43,27 @@ public class InstructorController {
     @Autowired
     private MessageService messageService;
 
+    /**
+     * Metodo para obtener todos los instructores
+     * 
+     * @param page resive el numero de paginas
+     * @param size resive el tamaño de la pagina
+     * @return retorna los Instructores y el status de la peticion
+     */
     @GetMapping()
     public @ResponseBody ResponseEntity<ResponseDto> getInstructores(@RequestHeader("page-number") Integer page,
-            @RequestHeader("page-size") Integer size) { 
+            @RequestHeader("page-size") Integer size) {
         PageDto<InstructorDto> response = instructorService.getPageDtoInstructores(page, size);
         System.out.println(response);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
-    } 
+    }
 
+    /**
+     * Metodo para obtener un Instructor por documento
+     * 
+     * @param documento resive el documento del instructor a consultar
+     * @return retorna el Instructor y el status de la peticion
+     */
     @GetMapping("/{documento}")
     public @ResponseBody ResponseEntity<ResponseDto> getFormatoById(@PathVariable("documento") String documento) {
         Instructor instructor = instructorService.getInstructorByDocumento(documento);
@@ -61,6 +74,14 @@ public class InstructorController {
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para crear un nuevo Instructor
+     * 
+     * @param instructorDto    resive el dto de Instructor
+     * @param validationResult resive errores de registro
+     * @param request          resive el estado de la peticion
+     * @return retorna el nuevo Instructor y el status de la peticion
+     */
     @PostMapping()
     public @ResponseBody ResponseEntity<ResponseDto> createInstrutor(
             @Valid @ModelAttribute InstructorDto instructorDto, BindingResult validationResult,
@@ -77,6 +98,15 @@ public class InstructorController {
         return new ResponseEntity<>(instructorService.transformDto(instructor), HttpStatus.CREATED);
     }
 
+    /**
+     * Metodo para actualizar un Instructor
+     * 
+     * @param documento        resive el documento del Instructor a modificar
+     * @param instructorDto    resive el dto de Instructor
+     * @param validationResult resive errores de registro
+     * @param request          resive el estado de la peticion
+     * @return retorna el Instructor modificado y el status de la peticion
+     */
     @PutMapping("/{documento}")
     public @ResponseBody ResponseEntity<ResponseDto> updateInstructor(@PathVariable("documento") String documento,
             @Valid @ModelAttribute InstructorDto instructorDto, BindingResult validationResult,
@@ -90,6 +120,12 @@ public class InstructorController {
         return new ResponseEntity<>(instructorService.transformDto(instructor), HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para deshabilitar un Instructor
+     * 
+     * @param documento resive el documento del Instructor a deshabilitar
+     * @return retorna el estado de la peticion
+     */
     @DeleteMapping("/{documento}")
     public @ResponseBody ResponseEntity<ResponseDto> deleteFichaById(@PathVariable("documento") String documento) {
         if (Objects.isNull(instructorService.getInstructorByDocumento(documento)))
@@ -99,6 +135,11 @@ public class InstructorController {
         return new ResponseEntity<>(new ActionDto("Instructor Inabilitado con exito"), HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo para verificar el funcionamiento del controlador
+     * 
+     * @return retorna el estado de la peticion
+     */
     @GetMapping("/health")
     public @ResponseBody ResponseEntity<String> health() {
         return new ResponseEntity<>("OK", HttpStatus.OK);

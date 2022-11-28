@@ -30,21 +30,38 @@ public class FichasService {
     @Autowired
     InstructorService instructorService;
 
+    /**
+     * 
+     * @return
+     */
     public List<Ficha> getAllFichas() {
         return fichasRepository.findAll();
     }
 
+    /**
+     * 
+     * @param id
+     * @return
+     */
     public Ficha getFichaById(String id) {
         return fichasRepository.findFichaByAnyId(id).orElse(null);
     }
 
-    public Ficha updateFicha(FichaDto fichaDto,String id) {
+    /**
+     * 
+     * @param fichaDto
+     * @param id
+     * @return
+     */
+    public Ficha updateFicha(FichaDto fichaDto, String id) {
         Ficha ficha = getFichaById(id);
-        if(Objects.isNull(ficha))
+        if (Objects.isNull(ficha))
             ficha = new Ficha();
         ficha.setId(fichaDto.getId());
-        ficha.setProgramaFormacionEntity(programasFormacionService.getProgramasFormacionByName(fichaDto.getProgramaId()));
-        ficha.setCentroFormacionEntity(centroFormacionService.getCentroFormacionById(fichaDto.getCentroId().toString()));
+        ficha.setProgramaFormacionEntity(
+                programasFormacionService.getProgramasFormacionByName(fichaDto.getProgramaId()));
+        ficha.setCentroFormacionEntity(
+                centroFormacionService.getCentroFormacionById(fichaDto.getCentroId().toString()));
         ficha.setInstructorEntity(instructorService.getInstructorByDocumento(fichaDto.getInstructor()));
         ficha.setModalidad(fichaDto.getModalidad());
         ficha.setInicio(fichaDto.getInicio());
@@ -53,11 +70,21 @@ public class FichasService {
         return fichasRepository.save(ficha);
     }
 
+    /**
+     * 
+     * @param fichaDto
+     * @return
+     */
     public Ficha createFicha(FichaDto fichaDto) {
-        return updateFicha( fichaDto,null);
+        return updateFicha(fichaDto, null);
     }
 
-    public FichaDto transfomrDto(Ficha ficha){
+    /**
+     * 
+     * @param ficha
+     * @return
+     */
+    public FichaDto transfomrDto(Ficha ficha) {
         FichaDto dto = new FichaDto();
         dto.setId(ficha.getId());
         dto.setProgramaId(ficha.getProgramaFormacionEntity().getId());
@@ -70,29 +97,54 @@ public class FichasService {
         return dto;
     }
 
-    public List<FichaDto> transformListDto(List<Ficha> fichas){
+    /**
+     * 
+     * @param fichas
+     * @return
+     */
+    public List<FichaDto> transformListDto(List<Ficha> fichas) {
         return fichas.stream().map(this::transfomrDto).collect(Collectors.toList());
     }
 
-    public Page<Ficha> getPageFicha(Pageable pageable){
+    /**
+     * 
+     * @param pageable
+     * @return
+     */
+    public Page<Ficha> getPageFicha(Pageable pageable) {
         return fichasRepository.findAll(pageable);
     }
 
-    public PageDto<FichaDto> getFichasDtoPage(int page, int size){
+    /**
+     * 
+     * @param page
+     * @param size
+     * @return
+     */
+    public PageDto<FichaDto> getFichasDtoPage(int page, int size) {
         Page<Ficha> ficha = getPageFicha(PageRequest.of(page, size));
         PageDto<FichaDto> pageDto = new PageDto<>();
         pageDto.setContent(this.transformListDto(ficha.getContent()));
-        return pageDto ;
+        return pageDto;
     }
 
-    //TODO pensar como remover el mensaje de sonar 
-    public boolean validateExist(FichaDto fichaDto){
-        return Objects.isNull(fichaDto.getId())||
-            Objects.isNull(fichaDto.getCentroId())||
-            Objects.isNull(fichaDto.getProgramaId())||
-            Objects.isNull(fichaDto.getInstructor());
+    /**
+     * 
+     * @param fichaDto
+     * @return
+     */
+    // TODO pensar como remover el mensaje de sonar
+    public boolean validateExist(FichaDto fichaDto) {
+        return Objects.isNull(fichaDto.getId()) ||
+                Objects.isNull(fichaDto.getCentroId()) ||
+                Objects.isNull(fichaDto.getProgramaId()) ||
+                Objects.isNull(fichaDto.getInstructor());
     }
 
+    /**
+     * 
+     * @param id
+     */
     public void disabledFicha(String id) {
         Ficha ficha = this.getFichaById(id);
         ficha.setEnabled(false);

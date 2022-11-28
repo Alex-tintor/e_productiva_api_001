@@ -21,6 +21,6 @@ public class Centro implements GeneralEntity {
     @Column(length = 75, nullable = false)
     private String nombre;
 
-    private boolean enabled;
+    private boolean enabled; // preguntar
 
 }

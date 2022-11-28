@@ -11,8 +11,8 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ProgramaDto extends ResponseDto{
-    
+public class ProgramaDto extends ResponseDto {
+
     @NotNull
     @NotBlank
     @NotEmpty
