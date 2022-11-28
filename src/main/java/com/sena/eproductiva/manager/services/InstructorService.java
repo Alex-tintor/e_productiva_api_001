@@ -47,7 +47,9 @@ public class InstructorService {
             instructor = new Instructor();
         instructor.setApellido(instructorDto.getApellido());
         instructor.setNombre(instructorDto.getNombre());
-        instructor.setCentro(centroFormacionService.getCentroFormacionById(instructorDto.getCentro().toString()));
+        System.out.println(instructorDto.getCentro() + "valor antes");
+        instructor.setCentro(centroFormacionService.getCentroFormacionById(instructorDto.getCentro()));
+        System.out.println(instructor.getCentro() + "valor despues");
         instructor.setDocumento(instructorDto.getDocumento());
         instructor.setEmail(instructorDto.getEmail());
         instructor.setEnabled(true);

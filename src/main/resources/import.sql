@@ -1,11 +1,11 @@
 -- -- Centros de Formacion
-INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede A",1);
-INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede B",2);
-INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede D",3);
-INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede E",4);
-INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede F",5);
-INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede G",6);
-INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede H",7);
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede A","1");
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede B","2");
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede D","3");
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede E","4");
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede F","5");
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede G","6");
+INSERT INTO db_e_productiva_003.centros (enabled,nombre,uuid) VALUES (b'1',"sede H","7");
 -- Usuario/aprendices
 INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('1056ce12b3694d1baf0d256d8877716c','Zapateiro Guzman','1016944420','zapateira@gmail.com',b'1','David andres',32654541,1);
 INSERT INTO db_e_productiva_003.usuario(uuid,apellido,documento,email,enabled,nombre,telefono,tipo_documento) VALUES ('1eb6f4e724474caf9d8e436885ae79af','Zapateiro Guzman','1016944421','zapateirb@gmail.com',b'1','David andres',32654542,1);
