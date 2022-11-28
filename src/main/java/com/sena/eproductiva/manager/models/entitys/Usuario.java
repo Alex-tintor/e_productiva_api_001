@@ -36,7 +36,7 @@ public class Usuario implements GeneralEntity {
                                                           // caracteres y de llave unica
     private String email;
 
-    @Column(nullable = false, length = 11, unique = true)
+    @Column(nullable = false, unique = true)
     private String telefono;
 
     @Column(nullable = false)

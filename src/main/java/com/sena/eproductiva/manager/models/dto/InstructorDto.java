@@ -36,7 +36,8 @@ public class InstructorDto extends ResponseDto {
     @NotEmpty
     private String telefono;
     @NotNull
-    @Positive
+    @NotEmpty
+    // @Positive
     private String centro;
     @NotNull
     private boolean enabled;

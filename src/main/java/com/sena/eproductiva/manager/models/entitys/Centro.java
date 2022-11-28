@@ -1,10 +1,11 @@
 package com.sena.eproductiva.manager.models.entitys;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -22,5 +23,12 @@ public class Centro implements GeneralEntity {
     private String nombre;
 
     private boolean enabled; // preguntar
+
+    @PrePersist
+    private void confirmarInformacion() {
+        if (this.uuid == null || this.uuid.length() < 32) {
+            this.uuid = UUID.randomUUID().toString().replace("-", "");
+        }
+    }
 
 }

@@ -108,27 +108,14 @@ public class AprendicesService {
             return aprendices.stream().map(this::transformDto).collect(Collectors.toList());
       }
 
-      /**
-       * Metodo para obtener las paginas de Aprendiz
-       * 
-       * @param pageable resive un objeto Pageable
-       * @return retorna las paginas de Aprendiz
-       */
       public Page<Aprendiz> getPageAprendices(Pageable pageable) {
             return aprendicesRepository.findAll(pageable);
       }
 
-      /**
-       * Metodo para devolver la paginacion de Aprendices
-       * 
-       * @param page resive el nuemro de paginas
-       * @param size resive el tamño de la consulta
-       * @return retorna la paginacion de Apendices
-       */
       public PageDto<AprendizDto> getPageDtoAprendices(int page, int size) {
             Page<Aprendiz> aprendices = getPageAprendices(PageRequest.of(page, size));
             PageDto<AprendizDto> pageDto = new PageDto<>();
-            pageDto.setContent(this.transformListDto(aprendices.getContent()));
+            pageDto.setContent(this.transformListDto(aprendiz.getContent()));
             return pageDto;
       }
 
