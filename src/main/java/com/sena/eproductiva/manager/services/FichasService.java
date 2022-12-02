@@ -1,5 +1,10 @@
 package com.sena.eproductiva.manager.services;
 
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -47,6 +52,18 @@ public class FichasService {
         return fichasRepository.findFichaByAnyId(id).orElse(null);
     }
 
+
+    private Date castDate(String date){
+        Date fecha;
+        try {
+            fecha = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+            return fecha;
+        } catch (ParseException e) {
+            fecha = new Date();
+        }
+        return fecha;
+
+    }
     /**
      * 
      * @param fichaDto
@@ -61,11 +78,11 @@ public class FichasService {
         ficha.setProgramaFormacionEntity(
                 programasFormacionService.getProgramasFormacionByName(fichaDto.getProgramaId()));
         ficha.setCentroFormacionEntity(
-                centroFormacionService.getCentroFormacionById(fichaDto.getCentroId().toString()));
+                centroFormacionService.getCentroFormacionById(fichaDto.getCentroId()));
         ficha.setInstructorEntity(instructorService.getInstructorByDocumento(fichaDto.getInstructor()));
         ficha.setModalidad(fichaDto.getModalidad());
-        ficha.setInicio(fichaDto.getInicio());
-        ficha.setFin(fichaDto.getFin());
+        ficha.setInicio(castDate(fichaDto.getInicio()));
+        ficha.setFin(castDate(fichaDto.getFin()));
         ficha.setEnabled(fichaDto.isEnabled());
         return fichasRepository.save(ficha);
     }
@@ -79,6 +96,19 @@ public class FichasService {
         return updateFicha(fichaDto, null);
     }
 
+
+    private String castString(Date fecha){
+        try {
+            DateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+            String finalDate = date.format(fecha);
+            return finalDate;
+        } catch (Exception e) {
+            Date localDate = new Date();
+            DateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+            String finalDate = date.format(localDate);
+            return finalDate;
+        }
+    }
     /**
      * 
      * @param ficha
@@ -87,12 +117,15 @@ public class FichasService {
     public FichaDto transfomrDto(Ficha ficha) {
         FichaDto dto = new FichaDto();
         dto.setId(ficha.getId());
+        System.out.println("valor programa id" + ficha.getProgramaFormacionEntity().getId());
         dto.setProgramaId(ficha.getProgramaFormacionEntity().getId());
+        System.out.println("valor centro" + ficha.getCentroFormacionEntity().getUuid());
         dto.setCentroId(ficha.getCentroFormacionEntity().getUuid());
+        System.out.println("valor instructor" +ficha.getInstructorEntity().getDocumento());
         dto.setInstructor(ficha.getInstructorEntity().getDocumento());
         dto.setModalidad(ficha.getModalidad());
-        dto.setInicio(ficha.getInicio());
-        dto.setFin(ficha.getFin());
+        dto.setInicio(castString(ficha.getInicio()));
+        dto.setFin(castString(ficha.getFin()));
         dto.setEnabled(ficha.isEnabled());
         return dto;
     }
@@ -133,7 +166,7 @@ public class FichasService {
      * @param fichaDto
      * @return
      */
-    // TODO pensar como remover el mensaje de sonar
+
     public boolean validateExist(FichaDto fichaDto) {
         return Objects.isNull(fichaDto.getId()) ||
                 Objects.isNull(fichaDto.getCentroId()) ||

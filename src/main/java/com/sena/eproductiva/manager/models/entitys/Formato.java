@@ -33,5 +33,6 @@ public class Formato implements GeneralEntity {
 
     @Column(nullable = false)
     private Date fecha;
+    
 
 }

@@ -111,7 +111,7 @@ public class CentroFormacionController {
      */
     @PutMapping("/{id}")
     public @ResponseBody ResponseEntity<ResponseDto> updateCentro(
-            @PathVariable("id") String id, @Valid @RequestBody CentroFormacionDto centroFormacionDto,
+            @PathVariable("id") String id, @Valid @ModelAttribute CentroFormacionDto centroFormacionDto,
             BindingResult validationResult, HttpServletRequest request) {
         if (validationResult.hasErrors())
             return messageService.invalidFields(validationResult, request.getRequestURI());
