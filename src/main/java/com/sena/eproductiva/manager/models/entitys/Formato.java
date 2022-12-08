@@ -11,24 +11,28 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "formato")
-public class FormatoEntity {
+public class Formato implements GeneralEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(length = 36)
+    private String id;
 
+    /*
+     * @ManyToOne define una relacion de muchos a uno
+     * 
+     * @JoinColumn une las tablas por medio de una llave foranea (Instructor)
+     */
     @ManyToOne
-    @JoinColumn(name = "instructorCc")
-    InstructorEntity instructorEntity;
+    @JoinColumn(name = "instructor") // Preguntar por la foreing key
+    private Instructor instructor;
 
     @Column(nullable = false)
     private Date fecha;
+    
 
 }

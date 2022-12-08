@@ -1,5 +1,6 @@
 package com.sena.eproductiva.manager.models.dto;
 
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -9,13 +10,15 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class CentroFormacionDto extends ResponseDto {
+public class ProgramaDto extends ResponseDto {
 
     @NotNull
-    private String uuid;
     @NotBlank
     @NotEmpty
+    private String id;
     @NotNull
+    @NotBlank
+    @NotEmpty
     private String nombre;
     @NotNull
     private boolean enabled;

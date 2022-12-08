@@ -1,36 +1,79 @@
 package com.sena.eproductiva.manager.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.sena.eproductiva.manager.models.entitys.ProgramaFormacionEntity;
+import com.sena.eproductiva.manager.models.dto.PageDto;
+import com.sena.eproductiva.manager.models.dto.ProgramaDto;
+import com.sena.eproductiva.manager.models.entitys.Programa;
 import com.sena.eproductiva.manager.repositories.ProgramasFormacionRepository;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class ProgramasFormacionService {
     @Autowired
     private ProgramasFormacionRepository programasFormacionRepository;
 
-    public List<ProgramaFormacionEntity> getAllProgramasFormacion() {
+    public List<Programa> getAllProgramas() {
         return programasFormacionRepository.findAll();
-    }
+      }
+        
+      public Programa getProgramasFormacionByName(String id) {
+      return programasFormacionRepository.findByNombre(id).orElse(null);
+      }
 
-    public Optional<ProgramaFormacionEntity> getProgramasFormacionById(long id) {
-        return programasFormacionRepository.findById(id);
-    }
+      public Programa createPrograma(ProgramaDto programaDto) {
+      return updatePrograma(programaDto, null);
+      }
+      
+      public Programa updatePrograma(ProgramaDto programaDto, String nombre) {
+      Programa programa = this.getProgramasFormacionByName(nombre);
+      if(Objects.isNull(programa))
+            programa = new Programa();
+      programa.setId(programaDto.getId());
+      programa.setNombre(programaDto.getNombre());
+      programa.setEnabled(programaDto.isEnabled());
+      return programasFormacionRepository.save(programa);
+      } 
 
-    public ProgramaFormacionEntity updateFicha(ProgramaFormacionEntity programasFormacionEntity) {
-        return programasFormacionRepository.save(programasFormacionEntity);
-    }
+      public ProgramaDto transformDto(Programa programa){
+            ProgramaDto dto = new ProgramaDto();
+            dto.setId(programa.getId());
+            dto.setNombre(programa.getNombre());
+            dto.setEnabled(programa.isEnabled());
+            return dto;
+      }
 
-    public ProgramaFormacionEntity createFicha(ProgramaFormacionEntity programasFormacionEntity) {
-        return programasFormacionRepository.save(programasFormacionEntity);
-    }
+      public List<ProgramaDto> transformListDto(List<Programa> programas){
+            return programas.stream().map(this::transformDto).collect(Collectors.toList());
+      }
+      
+      public Page<Programa> getPageProgramas(Pageable pageable){
+            return programasFormacionRepository.findAll(pageable);
+      }
 
-    public void deleteFichaById(long id) {
-        programasFormacionRepository.deleteById(id);
-    }
+      
+      public PageDto<ProgramaDto> getPageDtoProgramas(int page, int size) {
+            Page<Programa> programa = getPageProgramas(PageRequest.of(page, size));
+            PageDto<ProgramaDto> pageDto = new PageDto<>();
+            pageDto.setContent(this.transformListDto(programa.getContent()));
+            return pageDto;
+      }
+
+      public boolean validateExist(ProgramaDto programaDto){
+            return Objects.nonNull(getProgramasFormacionByName(programaDto.getNombre()))
+            || Objects.nonNull(getProgramasFormacionByName(programaDto.getNombre()));
+      }
+
+      public void disablePrograma(String documento){
+      Programa programa = getProgramasFormacionByName(documento);
+            programa.setEnabled(false);
+            programasFormacionRepository.save(programa);
+      }
 }
