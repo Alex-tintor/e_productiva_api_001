@@ -26,9 +26,9 @@ public class FichaDto extends ResponseDto {
     @NotNull
     private String centroId;
     @NotNull
-    private String inicio;
+    private Date inicio;
     @NotNull
-    private String fin;
+    private Date fin;
     @NotNull
     private boolean enabled;
 }
