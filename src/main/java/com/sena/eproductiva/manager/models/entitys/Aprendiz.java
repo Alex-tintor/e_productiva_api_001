@@ -31,5 +31,5 @@ public class Aprendiz extends Usuario {
     private Ficha ficha;
 
     @Column(nullable = false, length = 11, name = "etapa")
-    private EtapaType etapa;
+    private String etapa;
 }
