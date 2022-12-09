@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+
+
 import lombok.Data;
 
 @Data
@@ -24,6 +26,9 @@ public class Programa implements GeneralEntity{
 
     @Column(nullable = false)
     private boolean enabled;
+
+    @Column(nullable=false)
+    private String nivel;
 
     @PrePersist
     private void confirmarInformacion() {

@@ -30,6 +30,6 @@ public class Aprendiz extends Usuario {
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_APRENDIZ_FICHA"))
     private Ficha ficha;
 
-    @Column(nullable = false, length = 11, name = "etapa")
-    private EtapaType etapa;
+    @Column(nullable = false, name = "etapa")
+    private String etapa;
 }

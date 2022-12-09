@@ -73,7 +73,7 @@ public class AprendicesService {
             aprendiz.setEmail(aprendizDto.getEmail());
             aprendiz.setTelefono(aprendizDto.getTelefono());
             aprendiz.setFicha(fichasService.getFichaById(aprendizDto.getFichaId()));
-            aprendiz.setEtapa(EtapaType.valueOf(aprendizDto.getEtapa()));
+            aprendiz.setEtapa(aprendizDto.getEtapa());
             aprendiz.setEnabled(aprendizDto.isEnabled());
             return aprendicesRepository.save(aprendiz);
       }
@@ -93,7 +93,7 @@ public class AprendicesService {
             dto.setEmail(aprendiz.getEmail());
             dto.setTelefono(aprendiz.getTelefono());
             dto.setFichaId(aprendiz.getFicha().getId());
-            dto.setEtapa(aprendiz.getEtapa().toString());
+            dto.setEtapa(aprendiz.getEtapa());
             dto.setEnabled(aprendiz.isEnabled());
             return dto;
       }
