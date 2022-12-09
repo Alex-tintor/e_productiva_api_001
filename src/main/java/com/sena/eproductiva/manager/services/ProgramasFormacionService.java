@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sena.eproductiva.manager.models.dto.PageDto;
 import com.sena.eproductiva.manager.models.dto.ProgramaDto;
 import com.sena.eproductiva.manager.models.entitys.Programa;
+
 import com.sena.eproductiva.manager.repositories.ProgramasFormacionRepository;
 
 import java.util.List;
@@ -38,6 +39,7 @@ public class ProgramasFormacionService {
             programa = new Programa();
       programa.setId(programaDto.getId());
       programa.setNombre(programaDto.getNombre());
+      programa.setNivel(programaDto.getNivel());
       programa.setEnabled(programaDto.isEnabled());
       return programasFormacionRepository.save(programa);
       } 
@@ -46,6 +48,7 @@ public class ProgramasFormacionService {
             ProgramaDto dto = new ProgramaDto();
             dto.setId(programa.getId());
             dto.setNombre(programa.getNombre());
+            dto.setNivel(programa.getNivel());
             dto.setEnabled(programa.isEnabled());
             return dto;
       }
