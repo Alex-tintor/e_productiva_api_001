@@ -12,14 +12,18 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class ProgramaDto extends ResponseDto {
 
-    @NotNull
-    @NotBlank
-    @NotEmpty
+    // @NotNull
+    // @NotBlank
+    // @NotEmpty
     private String id;
     @NotNull
     @NotBlank
     @NotEmpty
     private String nombre;
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    private String nivel;
     @NotNull
     private boolean enabled;
 }
