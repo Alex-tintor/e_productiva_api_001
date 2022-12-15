@@ -76,9 +76,9 @@ public class FichasService {
             ficha = new Ficha();
         ficha.setId(fichaDto.getId());
         ficha.setProgramaFormacionEntity(
-                programasFormacionService.getProgramasFormacionByName(fichaDto.getProgramaId()));
+            programasFormacionService.getProgramasFormacionByName(fichaDto.getProgramaId()));
         ficha.setCentroFormacionEntity(
-                centroFormacionService.getCentroFormacionById(fichaDto.getCentroId()));
+            centroFormacionService.getCentroFormacionById(fichaDto.getCentroId()));
         ficha.setInstructorEntity(instructorService.getInstructorByDocumento(fichaDto.getInstructor()));
         ficha.setModalidad(fichaDto.getModalidad());
         ficha.setInicio(castDate(fichaDto.getInicio()));
@@ -117,11 +117,9 @@ public class FichasService {
     public FichaDto transfomrDto(Ficha ficha) {
         FichaDto dto = new FichaDto();
         dto.setId(ficha.getId());
-        System.out.println("valor programa id" + ficha.getProgramaFormacionEntity().getId());
         dto.setProgramaId(ficha.getProgramaFormacionEntity().getId());
-        System.out.println("valor centro" + ficha.getCentroFormacionEntity().getUuid());
+        // System.out.println("valor centro" + ficha.getCentroFormacionEntity().getUuid());
         dto.setCentroId(ficha.getCentroFormacionEntity().getUuid());
-        System.out.println("valor instructor" +ficha.getInstructorEntity().getDocumento());
         dto.setInstructor(ficha.getInstructorEntity().getDocumento());
         dto.setModalidad(ficha.getModalidad());
         dto.setInicio(castString(ficha.getInicio()));

@@ -44,6 +44,7 @@ public class Ficha implements GeneralEntity {
     @ManyToOne
     @JoinColumn(name = "centroId")
     Centro centroFormacionEntity;
+    
 
     @Column(nullable = false)
     private Date inicio;
